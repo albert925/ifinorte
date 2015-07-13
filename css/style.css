@@ -56,6 +56,18 @@ header{
 			header #mn_red #redes a:hover,header #mn_red #redes a:active{
 				transform: scale(1.1);
 			}
+#mn_mv{
+	color: #CB0601;
+	cursor: pointer;
+	display: none;
+	font-size: 20px;
+	transform: scale(1.5);
+	text-align: center;
+	width: 2em;
+}
+#mn_mv:hover,#mn_mv:active{
+	transform: scale(1.6);
+}
 #mnP{
 	display: flex;
 }
@@ -107,14 +119,17 @@ header{
 		background: #002457;
 		text-decoration: 0 0 3px #fff;
 	}
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1150px){
+	#mn_mv{
+		display: block;
+	}
 	#mnP{
-		background: #004092;
+		background: #EDEDED;
 		height: calc(100% - 180px);
 		left: -100%;
 		overflow: scroll;
 		position: fixed;
-		top: 8em;
+		top: 5em;
 		width: 70%;
 		z-index: 30;
 	}
@@ -130,10 +145,10 @@ header{
 			#mnP ul li{
 				border-bottom:1px solid #0D4374;
 				display: block;
-				text-align: center;
+				padding: 0.5em 0;
+				text-align: left;
 			}
 				#mnP ul li ul{
-					background: #002D60;
 					width: 100%;
 					position: relative;
 					z-index: 1;
@@ -151,4 +166,27 @@ header{
 				#mnP ul li .submen:hover,#mnP ul li .submen:active{
 					transform: scale(2) rotate(180deg);
 				}
+}
+@media screen and (max-width: 800px){
+	header{
+		width: 100%;
+		z-index: 30;
+	}
+		header #empr{
+			width: 30%;
+		}
+		header #logo{
+			width: 100%;
+		}
+		header #mn_red{
+			width: 70%;
+		}
+}
+@media screen and (max-width: 500px){
+		header #empr{
+			width: 40%;
+		}
+		header #mn_red{
+			width: 60%;
+		}
 }

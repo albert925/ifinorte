@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="css/inicio.css" />
 	<script src="js/jquery_2_1_1.js"></script>
 	<script src="js/owl_carousel_min.js"></script>
+	<script src="js/scripag.js"></script>
 	<script type="application/ld+json">
 		{
 		  "@context" : "http://schema.org",
@@ -42,6 +43,7 @@
 				<a href="https://www.facebook.com/ifinorte.nortedesantander" target="_blank"><span class="icon-facebook"></span></a>
 				<a href="https://twitter.com/@ifinortecucuta" target="_blank"><span class="icon-twitter"></span></a>
 			</article>
+			<div id="mn_mv"><span class="icon-menu"></span></div>
 			<nav id="mnP">
 				<ul>
 					<li><a class="sell" href="">Inicio</a></li>
@@ -109,7 +111,19 @@
 				<input type="search" id="busq" />
 				<div><span class="icon-search"></span></div>
 			</article>
-			<article></article>
+			<article id="todfrases">
+				<article class="owl-carousel-b owl-theme owl-loaded">
+					<div class="item">
+						<hgropu>
+							<h2>Gestionar y optimizar la admiinistración de proyectos y recursos financieros</h2>
+							<h5>Claritas est etiam processus dynamicus, qui squitur mutationem consuetudium lectorum</h5>
+						</hgropu>
+						<article>
+							<a href="#">Leer más</a>
+						</article>
+					</div>
+				</article>
+			</article>
 		</article>
 	</section>
 	<section>
@@ -186,5 +200,37 @@
 			</article>
 		</article>
 	</footer>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $('.owl-carousel').owlCarousel({
+				autoplay:false,
+				loop:false,
+				margin:10,
+				responsiveClass:true,
+				URLhashListener:true,
+				startPosition: 'URLHash',
+				nav:false,
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:2
+					},
+					1000:{
+						items:3
+					}
+				}
+			});
+			$(".owl-carousel-b").owlCarousel({
+				autoHeight: false,
+    		autoHeightClass: 'owl-height',
+    		autoplay:true,
+				autoplayTimeout:3000,
+				autoplayHoverPause:true,
+    		items:1
+			});
+		});
+	</script>
 </body>
 </html>
