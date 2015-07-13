@@ -1,0 +1,154 @@
+@font-face{
+	font-family: "rajdhani";
+	src: url(fuentes/Rajdhani-Bold.ttf);
+	font-weight: bold;
+}
+@font-face{
+	font-family: "rajdhani";
+	src: url(fuentes/Rajdhani-Light.ttf);
+	font-weight: lighter;
+}
+@font-face{
+	font-family: "rajdhani";
+	src: url(fuentes/Rajdhani-Regular.ttf);
+	font-weight: normal;
+}
+body{
+	font-family: "rajdhani";
+	font-size: 16px;
+}
+	figure img{
+		width: 100%;
+	}
+header{
+	background: #EDEDED;
+	display: flex;
+}
+	header #empr{
+		width: 20%;
+	}
+	header #logo{
+		margin: 0 auto;
+		width: 70%;
+	}
+	header #mn_red{
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		-webkit-justify-content: space-between;
+		-ms-justify-content: space-between;
+		justify-content: space-between;
+		width: 80%;
+	}
+		header #mn_red #redes{
+			display: flex;
+			-webkit-justify-content: flex-end;
+			-ms-justify-content: flex-end;
+			justify-content: flex-end;
+		}
+			header #mn_red #redes a{
+				color: #CF0300;
+				font-size: 25px;
+				margin: 0 0.5em;
+				text-decoration: none;
+			}
+			header #mn_red #redes a:hover,header #mn_red #redes a:active{
+				transform: scale(1.1);
+			}
+#mnP{
+	display: flex;
+}
+	#mnP a{
+		border-right: 1px solid #ADADAD;
+		color: #CB0601;
+		font-weight: bold;
+		padding: 0 1em;
+		text-decoration: none;
+	}
+	#mnP a:hover,#mnP a:active,.sell{
+		border-bottom:3px solid #CC0802;
+	}
+	#mnP ul{
+		display: flex;
+		-webkit-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		z-index: 35;
+	}
+		#mnP ul li{
+			margin: 0;
+		}
+			#mnP ul li ul{
+				background:#EDEDED;
+				display: none;
+				-webkit--ms-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				position: absolute;
+				text-align: center;
+			}
+				#mnP ul li ul li{
+					border-bottom: 1px solid #ADADAD;
+					padding: 0.5em 0;
+				}
+				#mnP ul li ul a{
+					border:0;
+					font-weight: normal;
+					padding: 0.5em 1em;
+				}
+		#mnP ul li:hover>ul{
+			display: flex;
+		}
+	#mnP .sel{
+		background: #002457;
+		text-decoration: 0 0 3px #fff;
+	}
+@media screen and (max-width: 800px){
+	#mnP{
+		background: #004092;
+		height: calc(100% - 180px);
+		left: -100%;
+		overflow: scroll;
+		position: fixed;
+		top: 8em;
+		width: 70%;
+		z-index: 30;
+	}
+		#mnP a{
+			border-right: 0;
+			text-align: center;
+		}
+		#mnP ul{
+			display: block;
+			margin-top: 1em;
+			width: 100%;
+		}
+			#mnP ul li{
+				border-bottom:1px solid #0D4374;
+				display: block;
+				text-align: center;
+			}
+				#mnP ul li ul{
+					background: #002D60;
+					width: 100%;
+					position: relative;
+					z-index: 1;
+				}
+				#mnP ul li:hover ul{
+					display: none;
+				}
+				#mnP ul li .submen{
+					cursor: pointer;
+					margin-top: -1em;
+					position: absolute;
+					right: 2em;
+					transform: scale(1.5) rotate(180deg);
+				}
+				#mnP ul li .submen:hover,#mnP ul li .submen:active{
+					transform: scale(2) rotate(180deg);
+				}
+}

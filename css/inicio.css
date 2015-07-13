@@ -1,0 +1,51 @@
+#sesion{
+	background: rgba(0,0,0,0.7);
+}
+	#sesion h2{
+		border-bottom:1px solid #FEFEFE;
+		margin: 1em 0 0 0;
+		width: 8em;
+	}
+	#sesion .bupis{
+		border-bottom: 1px solid #FEFEFE;
+		margin-bottom: 1em;
+	}
+	#sesion .inus,.ubi,.tel{
+		margin: 0 1em;
+	}
+.ins_fra{
+	background: url(../imagenes/fond_login.jpg) no-repeat center / cover;
+	display: flex;
+	color: #FEFEFE;
+}
+	.ins_fra a{
+		color: #FEFEFE;
+		text-decoration: none;
+	}
+	.ins_fra #sesion{
+		width: 30%;
+	}
+	.ins_fra #frases{
+		width: 70%;
+	}
+		.inus form div{
+			text-align: right;
+		}
+		.inus form input{
+			color: #000;
+			margin: 0.5em 0;
+			padding: 0.5em;
+		}
+		.inus form input[type=submit]{
+			background: #fff;
+			border:0;
+			border-radius: 5px;
+			color: #CA0602;
+			font-weight: bold;
+			margin-right: 1em;
+			padding: 0.5em 2em;
+		}
+		.inus form input[type=submit]:hover{
+			background: #680001;
+			color: #fff;
+		}
