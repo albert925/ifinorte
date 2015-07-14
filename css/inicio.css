@@ -66,6 +66,7 @@
 	background: url(../imagenes/fond_login.jpg) no-repeat center / cover;
 	display: flex;
 	color: #FEFEFE;
+	margin-bottom: 1em;
 }
 	.ins_fra a{
 		color: #FEFEFE;
@@ -77,6 +78,9 @@
 	.ins_fra #frases{
 		width: 70%;
 	}
+		.inus form a:hover{
+			text-decoration: underline;
+		}
 		.inus form div{
 			text-align: right;
 		}
@@ -101,3 +105,17 @@
 	.ubi p,.tel p,.tel h3{
 		text-align: right;
 	}
+@media screen and (max-width: 800px){
+		#todfrases .item h2{
+			font-size: 35px;
+		}
+	.ins_fra{
+		-webkit-flex-direction: column;
+		ms-flex-direction: column;
+		flex-direction: column;
+	}
+		.ins_fra #sesion,.ins_fra #frases{
+			margin: 1em auto;
+			width: 90%;
+		}
+}

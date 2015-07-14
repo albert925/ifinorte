@@ -56,6 +56,10 @@ header{
 			header #mn_red #redes a:hover,header #mn_red #redes a:active{
 				transform: scale(1.1);
 			}
+#automargen{
+	margin: 0 auto;
+	max-width: 1200px;
+}
 #mn_mv{
 	color: #CB0601;
 	cursor: pointer;
@@ -119,6 +123,48 @@ header{
 		background: #002457;
 		text-decoration: 0 0 3px #fff;
 	}
+	#mnV ul{
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 0.5em;
+	}
+		#mnV ul li{
+			border-bottom: 1px solid #DEDEDE;
+			padding: 0.5em 0;
+		}
+			#mnV ul li a:hover{
+				border-bottom: 1px solid #BF0400;
+			}
+			#mnV ul li ul{
+				display: none;
+			}
+.columninput{
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	text-align: center;
+}
+	.columninput input,.columninput select{
+		text-align: center;
+	}
+.flmvycont{
+	display: flex;
+}
+	.flmvycont section{
+		padding: 0 1em;
+		width: 80%;
+	}
+	.flmvycont #mnV{
+		background: #F4F4F4;
+		color: #292929;
+		font-size: 18px;
+		width: 20%;
+	}
+		.flmvycont #mnV a{
+			color: #292929;
+			text-decoration: none;
+		}
 @media screen and (max-width: 1150px){
 	#mn_mv{
 		display: block;
@@ -129,7 +175,7 @@ header{
 		left: -100%;
 		overflow: scroll;
 		position: fixed;
-		top: 5em;
+		top: 7em;
 		width: 70%;
 		z-index: 30;
 	}
@@ -188,5 +234,8 @@ header{
 		}
 		header #mn_red{
 			width: 60%;
+		}
+		#mnP{
+			top: 5em;
 		}
 }

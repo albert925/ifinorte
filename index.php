@@ -134,11 +134,23 @@
 					<li><a href="nosotros">Quejas y Reclamos</a></li>
 					<li><a href="encuestas">Encuestas</a></li>
 					<li><a href="Formatos">Formatos</a></li>
+					<li><a href="">men</a>
+						<ul>
+							<li><a href="">men</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<section>
 				<figure id="galery">
-					<div></div>
+					<div class="slider-wrapper theme-default">
+						<div id="slider" class="nivoSlider">
+							<img src="imagenes/galery/fondo.jpg" alt="imagen" title="#caption1" />
+						</div>
+						<div id="caption1">
+							<h2>Texto</h2>
+						</div>
+					</div>
 				</figure>
 				<h1>Ifinorte</h1>
 				<article id="noticias">
@@ -200,6 +212,30 @@
 			</article>
 		</article>
 	</footer>
+	<script src="js/nivo_slider.js"></script>
+	<script type="text/javascript">
+		$(window).load(function(){
+      $('#slider').nivoSlider({
+          effect: 'fade',
+          slices: 15,
+          boxCols: 8,
+          boxRows: 4,
+          animSpeed: 500,
+          pauseTime: 10000,
+          pauseOnHover:true,
+          startSlide: 0,
+          directionNav: true,
+          controlNav: false,
+          controlNavThumbs: false,
+          pauseOnHover: true,
+          manualAdvance: false,
+          prevText: 'Prev',
+          nextText: 'Next',
+          randomStart: false,
+      });
+   	});
+   	// http://web.tursos.com/como-implementar-nivo-slider-en-tu-pagina-web/
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('.owl-carousel').owlCarousel({

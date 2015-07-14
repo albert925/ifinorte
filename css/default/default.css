@@ -25,12 +25,8 @@ Supports Thumbs: true
 }
 
 .theme-default .nivo-controlNav {
-	bottom: -50%;
-	display: none;
-	padding: 20px 0;
-	position: absolute;
 	text-align: center;
-	width: 85%;
+	padding: 20px 0;
 }
 .theme-default .nivo-controlNav a {
 	display:inline-block;
@@ -69,18 +65,8 @@ Supports Thumbs: true
 }
 
 .theme-default .nivo-caption {
-	display: flex;
-	-webkit-justify-content: center;
-	-ms-justify-content: center;
-	justify-content: center;
-  font-family: Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
-	.theme-default .nivo-caption h2{
-		background:rgba(0,0,0,0.7);
-		margin: 0 auto;
-		padding: 0.5em;
-		text-shadow: 0 0 3px #000;
-	}
 .theme-default .nivo-caption a {
     color:#fff;
     border-bottom:1px dotted #fff;
@@ -88,7 +74,9 @@ Supports Thumbs: true
 .theme-default .nivo-caption a:hover {
     color:#fff;
 }
-
+	.theme-default .nivo-caption h2{
+		color: #CB0600;
+	}
 .theme-default .nivo-controlNav.nivo-thumbs-enabled {
 	width: 100%;
 }
@@ -102,10 +90,4 @@ Supports Thumbs: true
 	display: block;
 	width: 120px;
 	height: auto;
-}
-@media screen and (max-width: 800px){
-	.theme-default .nivo-caption h2{
-		margin: 0;
-		font-size: 16px;
-	}
 }
