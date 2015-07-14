@@ -1,3 +1,8 @@
+h1{
+	margin: 0;
+	padding: 0;
+	text-indent:-9999px;
+}
 	#frases #busqueda{
 		display: flex;
 		-webkit-justify-content: flex-end;
@@ -19,6 +24,38 @@
 			margin: 0 1em;
 			font-size: 25px;
 		}
+#galery{
+	margin-bottom: 1em;
+}
+#noticias{
+	display: flex;
+	-webkit-justify-content: space-around;
+	ms-justify-content: space-around;
+	justify-content: space-around;
+}
+	#noticias figure{
+		margin-bottom: 1em;
+		width: 30%;
+	}
+		#noticias figure h3{
+			color: #C80601;
+			text-align: center;
+		}
+		#noticias figure figcaption{
+			text-align: justify;
+		}
+			#noticias figure figcaption a{
+				color: #C80601;
+				font-style: italic;
+				font-weight: bold;
+				text-decoration: none;
+			}
+			#noticias figure figcaption a:hover,#noticias figure figcaption a:active{
+				text-decoration: underline;
+			}
+			#noticias figure figcaption p{
+				color: #696969;
+			}
 #sesion{
 	background: rgba(0,0,0,0.7);
 }
@@ -106,6 +143,9 @@
 		text-align: right;
 	}
 @media screen and (max-width: 800px){
+		#noticias figure{
+			width: 40%;
+		}
 		#todfrases .item h2{
 			font-size: 35px;
 		}
@@ -116,6 +156,17 @@
 	}
 		.ins_fra #sesion,.ins_fra #frases{
 			margin: 1em auto;
+			width: 90%;
+		}
+}
+@media screen and (max-width: 400px){
+	#noticias{
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+		#noticias figure{
+			margin: 0 auto;
 			width: 90%;
 		}
 }

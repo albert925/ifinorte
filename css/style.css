@@ -20,6 +20,59 @@ body{
 	figure img{
 		width: 100%;
 	}
+footer{
+	background: #D30801;
+	color: #FFFFFF;
+	padding-top: 2em;
+}
+	footer a{
+		color: #fff;
+		text-decoration: none;
+	}
+	footer a:hover,footer a:active{
+		text-decoration: underline;
+	}
+		footer .bupis h2{
+			border-bottom:2px solid #FEFEFE;
+			margin: 0;
+			width: 8em;
+		}
+	footer .flexfoot{
+		display: flex;
+		-webkit-justify-content: space-between;
+		-ms-justify-content: space-between;
+		justify-content: space-between;
+		padding-top: 1em;
+	}
+		footer .flexfoot article{
+			display: flex;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+		}
+			footer .flexfoot article a{
+				padding: 0.5em 0;
+			}
+			footer .flexfoot article div{
+				padding: 0.25em 0;
+			}
+	footer .footfin{
+		background: #930200;
+		padding: 1em 0;
+	}
+		footer .footfin .flfin{
+			display: flex;
+			-webkit-justify-content: space-between;
+			-ms-justify-content: space-between;
+			justify-content: space-between;
+			font-size: 14px;
+		}
+			footer .footfin .flfin #redes{
+				font-size: 30px;
+			}
+			footer .footfin .flfin #redes:hover,footer .footfin .flfin #redes:active{
+				transform: scale(1.1);
+			}
 header{
 	background: #EDEDED;
 	display: flex;
@@ -138,6 +191,10 @@ header{
 			#mnV ul li ul{
 				display: none;
 			}
+.bupis{
+	border-bottom: 1px solid #FEFEFE;
+	margin-bottom: 1em;
+}
 .columninput{
 	display: flex;
 	-webkit-flex-direction: column;
@@ -165,6 +222,14 @@ header{
 			color: #292929;
 			text-decoration: none;
 		}
+.porfond{
+	background: #F4F4F4;
+	padding: 2em 0;
+}
+	.porfond .prov{
+		border-bottom:1px solid #000;
+		border-top:1px solid #000;
+	}
 @media screen and (max-width: 1150px){
 	#mn_mv{
 		display: block;
@@ -214,6 +279,12 @@ header{
 				}
 }
 @media screen and (max-width: 800px){
+		footer .flexfoot,footer .footfin .flfin{
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			text-align: center;
+		}
 	header{
 		width: 100%;
 		z-index: 30;
@@ -226,6 +297,13 @@ header{
 		}
 		header #mn_red{
 			width: 70%;
+		}
+		.flmvycont section{
+			margin: 1em auto;
+			width: 90%;
+		}
+		.flmvycont #mnV{
+			display: none;
 		}
 }
 @media screen and (max-width: 500px){

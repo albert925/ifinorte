@@ -147,7 +147,7 @@
 						<div id="slider" class="nivoSlider">
 							<img src="imagenes/galery/fondo.jpg" alt="imagen" title="#caption1" />
 						</div>
-						<div id="caption1">
+						<div id="caption1" style="display:none;">
 							<h2>Texto</h2>
 						</div>
 					</div>
@@ -155,8 +155,9 @@
 				<h1>Ifinorte</h1>
 				<article id="noticias">
 					<figure>
+						<h3>Ifinorte esto un titulo</h3>
 						<a href="">
-							<img src="" alt="iamgen" />
+							<img src="imagenes/galery/fondo.jpg" alt="iamgen" />
 						</a>
 						<figcaption>
 							<p>
@@ -168,18 +169,29 @@
 								Excepteur sint occaecat cupidatat non proident, 
 								sunt in culpa qui officia deserunt mollit anim id est laborum."
 							</p>
+							<a href="#">Leer más...</a>
 						</figcaption>
 					</figure>
 				</article>
 			</section>
 		</article>
 	</section>
-	<section>
-		<article id="automargen" class="prov"></article>
+	<section class="porfond">
+		<article id="automargen" class="prov">
+			<article class="owl-carousel owl-theme owl-loaded">
+				<div class="item">
+					<figure>
+						<a href="#" target="_blank">
+							<img src="imagenes/provedores/aa.png" alt="aa" />
+						</a>
+					</figure>
+				</div>
+			</article>
+		</article>
 	</section>
 	<footer>
-		<div><h2></h2></div>
-		<article class="flexfoot">
+		<div id="automargen" class="bupis"><h2></h2></div>
+		<article id="automargen" class="flexfoot">
 			<article>
 				<div><b>Dirección:</b> Av 0 # 9-80 Edif. ROSETAL</div>
 				<div>Cúcuta, Norte de Santander, Colombia</div>
@@ -199,16 +211,18 @@
 				<a href="Preguntas">Preguntas Frecuentes</a>
 			</article>
 		</article>
-		<article class="flexfoot">
-			<article>
-				COPYRUGHT @ 2015 INFINORTE CÚCUTA COLOMBIA
-			</article>
-			<article>
-				Diseño y Programación &nbsp;&nbsp;<a href="http://conaxport.com/" target="_blank">Conaxport</a>
-			</article>
-			<article id="redes">
-				<a href="" target="_blank"><span class="icon-facebook"></span></a>
-				<a href="" target="_blank"><span class="icon-twitter"></span></a>
+		<article class="footfin">
+			<article id="automargen" class="flfin">
+				<article>
+					COPYRUGHT @ 2015 INFINORTE CÚCUTA COLOMBIA
+				</article>
+				<article>
+					Diseño y Programación &nbsp;&nbsp;<a href="http://conaxport.com/" target="_blank">Conaxport</a>
+				</article>
+				<article id="redes">
+					<a href="" target="_blank"><span class="icon-facebook"></span></a>
+					<a href="" target="_blank"><span class="icon-twitter"></span></a>
+				</article>
 			</article>
 		</article>
 	</footer>
@@ -239,12 +253,13 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('.owl-carousel').owlCarousel({
-				autoplay:false,
+				autoplay:true,
+				autoplayTimeout:3000,
+				autoplayHoverPause:true,
+				dots:false,
 				loop:false,
 				margin:10,
 				responsiveClass:true,
-				URLhashListener:true,
-				startPosition: 'URLHash',
 				nav:false,
 				responsive:{
 					0:{
@@ -255,6 +270,9 @@
 					},
 					1000:{
 						items:3
+					},
+					1200:{
+						items:5
 					}
 				}
 			});
