@@ -69,8 +69,8 @@
 						</ul>
 					</li>
 					<li><a href="boletin">Boletin Informativo</a></li>
-					<li><a href="Contacto">Contáctenos</a></li>
-					<li><a href="Registro">Clientes</a></li>
+					<li><a href="contacto">Contáctenos</a></li>
+					<li><a href="registro">Clientes</a></li>
 				</ul>
 			</nav>
 		</article>
@@ -255,7 +255,7 @@
 				<div>08:00 AM - 06:00 PM</div>
 			</article>
 			<article>
-				<a href="Contacto">Contáctenos</a>
+				<a href="contacto">Contáctenos</a>
 				<a href="politicas">Políticas de privacidad y seguridad</a>
 				<a href="portafolio">Portafolio de servicios</a>
 				<a href="mapa_sitio">Mapa del sitio</a>
@@ -274,8 +274,8 @@
 					Diseño y Programación &nbsp;&nbsp;<a href="http://conaxport.com/" target="_blank">Conaxport</a>
 				</article>
 				<article id="redes">
-					<a href="" target="_blank"><span class="icon-facebook"></span></a>
-					<a href="" target="_blank"><span class="icon-twitter"></span></a>
+					<a href="https://www.facebook.com/ifinorte.nortedesantander" target="_blank"><span class="icon-facebook"></span></a>
+					<a href="https://twitter.com/@ifinortecucuta" target="_blank"><span class="icon-twitter"></span></a>
 				</article>
 			</article>
 		</article>

@@ -109,6 +109,15 @@ header{
 			header #mn_red #redes a:hover,header #mn_red #redes a:active{
 				transform: scale(1.1);
 			}
+input[type=submit]{
+	background: #D30801;
+	border: 0;
+	color: #fff;
+	padding: 0.5em 0;
+}
+input[type=submit]:hover,input[type=submit]:active{
+	background: #930200;
+}
 #automargen{
 	margin: 0 auto;
 	max-width: 1200px;
@@ -212,6 +221,9 @@ header{
 		padding: 0 1em;
 		width: 75%;
 	}
+		.flmvycont section h1{
+			text-align: center;
+		}
 	.flmvycont #mnV{
 		background: #F4F4F4;
 		color: #292929;
