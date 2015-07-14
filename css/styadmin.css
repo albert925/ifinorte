@@ -1,6 +1,43 @@
 h1,h2{
 	text-align: center;
 }
+section{
+	margin-bottom: 1em;
+}
+#disbyn{
+	background: #D30801;
+	color: #fff;
+	padding: 0.5em 0;
+	text-decoration: none;
+}
+#disbyn:hover,#disbyn:active{
+	background: #930200;
+}
+#mnad{
+	display: flex;
+	-weblkit-justify-content: space-around;
+	-ms-justify-content: space-around;
+	justify-content: space-around;
+}
+	#mnad a{
+		background: #EDEDED;
+		color: #000;
+		padding: 0.5em;
+		text-decoration: none;
+	}
+	#mnad a:hover,#mnad a:active{
+		background: #930200;
+		color: #fff;
+	}
+.doll{
+	background: #000;
+	color: #fff;
+	text-decoration: none;
+}
+.doll:hover,.doll:active{
+	background: #EDEDED;
+	color: #000;
+}
 .flA{
 	display: flex;
 	-webkit-justify-content: space-around;
@@ -10,10 +47,52 @@ h1,h2{
 	.flA article{
 		margin-bottom: 1em;
 	}
+.flC{
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: space-around;
+	-ms-justify-content: space-around;
+	justify-content: space-around;
+}
+.htilf{
+	-webkit-word-break: wrap;
+	-ms-word-break: wrap;
+	-moz-word-break: wrap;
+	word-break: wrap;
+	margin-bottom: 1em;
+	width: 25%;
+}
+	.htilf h3{
+		text-align: center;
+	}
+.oulcajas{
+	overflow: hidden;
+	height: 0;
+}
 @media screen and (max-width: 800px){
-	.flA{
+	#mnad{
+		text-align: center;
+	}
+		#mnad a{
+			border-bottom: 1px solid #ADADAD;
+		}
+	.doll{
+		padding: 0.5em 0;
+	}
+	.flA,#mnad,.flC{
 		-webkit-flex-direction: column;
 		-ms-flex-direction: column;
 		flex-direction: column;
+	}
+	.htilf{
+		width: 40%;
+	}
+}
+@media screen and (max-width: 400px){
+	.htilf{
+		margin: 1em auto;
+		width: 90%;
 	}
 }

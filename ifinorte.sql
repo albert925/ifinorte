@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2015 a las 22:42:44
+-- Tiempo de generación: 14-07-2015 a las 23:21:39
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   `user_adm` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `pass_adm` varchar(400) COLLATE utf8_spanish_ci NOT NULL,
   `tp_adm` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`id_adm`, `user_adm`, `pass_adm`, `tp_adm`) VALUES
+(1, 'admin', '318daf662b81447500d3a29e54d2c074fc3521f7', '1');
 
 -- --------------------------------------------------------
 
@@ -158,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `frases` (
 CREATE TABLE IF NOT EXISTS `galeria` (
 `id_gal` int(11) NOT NULL,
   `tit_gal` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `fra_gal` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `txt_gal` text COLLATE utf8_spanish_ci NOT NULL,
   `fe_gal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -1519,7 +1527,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-MODIFY `id_adm` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_adm` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --

@@ -116,16 +116,6 @@
 				<div><b>Horario:</b> Lunes - Viernes </div>
 				<div>08:00 AM - 06:00 PM</div>
 			</article>
-			<article>
-				<a href="../contacto">Contáctenos</a>
-				<a href="../politicas">Políticas de privacidad y seguridad</a>
-				<a href="../portafolio">Portafolio de servicios</a>
-				<a href="../mapa_sitio">Mapa del sitio</a>
-			</article>
-			<article>
-				<a href="../tramites">Trámites y Servicios</a>
-				<a href="../preguntas">Preguntas Frecuentes</a>
-			</article>
 		</article>
 		<article class="footfin">
 			<article id="automargen" class="flfin">
