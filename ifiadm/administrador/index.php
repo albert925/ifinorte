@@ -84,8 +84,25 @@
 		</article>
 	</header>
 	<section>
-		<article id="automargen">
-			<h1><?php echo "$usad"; ?></h1>
+		<h1><?php echo "$usad"; ?></h1>
+		<article class="flA">
+			<article class="columninput">
+				<h2>Cambiar nombre de usuario</h2>
+				<input type="text" id="usfad" value="<?php echo $usad ?>" />
+				<div id="txB"></div>
+				<input type="submit" value="Modificar" id="camA" data-adm="<?php echo $idad ?>" />
+			</article>
+			<article class="columninput">
+				<h2>Cambiar Contraseña</h2>
+				<label><b>Contraseña Actual</b></label>
+				<input type="password" id="psac" />
+				<label><b>Contraseña Nueva</b></label>
+				<input type="password" id="psna" />
+				<label><b>Repite contraseña nueva</b></label>
+				<input type="password" id="psnb" />
+				<div id="txC"></div>
+				<input type="submit" value="Modificar" id="camB" data-adm="<?php echo $idad ?>" />
+			</article>
 		</article>
 	</section>
 	<footer>
