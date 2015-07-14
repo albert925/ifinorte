@@ -27,7 +27,7 @@
 	<script src="../../../js/jquery_2_1_1.js"></script>
 	<script src="../../../js/scripag.js"></script>
 	<script src="../../../js/scripadmin.js"></script>
-	<script src="../../../ckeditor/ckeditor.js"></script>
+	<script src="../../../js/iamgens.js"></script>
 </head>
 <body>
 	<header>
@@ -47,8 +47,8 @@
 					<li class="submen" data-num="1">
 						<a class="sell" href="../slider">Sliders</a>
 						<ul class="children1">
-							<li><a class="sell" href="../slider">Slider Noticias</a></li>
-							<li><a href="../slider/slider_images.php">Slider Imágenes</a></li>
+							<li><a href="../slider">Slider Noticias</a></li>
+							<li><a class="sell" href="../slider/slider_images.php">Slider Imágenes</a></li>
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
@@ -85,28 +85,26 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btA" href="#">Nuevo Slider noticia</a>
-		<a href="slider_images.php">Slider de imágenes</a>
+		<a href="../slider">Ver Slider noticias</a>
+		<a id="btB" href="#"> Nuevo Slider de imágenes</a>
 	</nav>
 	<section>
-		<h1>Slider Noticias</h1>
-		<article id="cjA" class="oulcajas">
+		<h1>Slider Imágenes</h1>
+		<article id="cjB" class="oulcajas">
 			<article id="automargen">
-				<form action="new_slidnoticia.php" method="post" class="columninput">
+				<form action="#" method="post" enctype="multipart/form-data" id="nvG" class="columninput">
 					<label>*<b>Titulo</b></label>
-					<input type="text" name="ttsln" required />
-					<label><b>Frase</b></label>
-					<input type="text" name="frsln" />
-					<label>*<b>Texto</b></label>
-					<textarea id="editor1" name="txtsln"></textarea>
-					<input type="submit" value="Ingresar" />
-					<script>
-						CKEDITOR.replace('txtsln');
-					</script>
+					<input type="text" id="ttsig" name="ttsig" required />
+					<label><b>Link</b></label>
+					<input type="url" id="lksig" name="lksig" />
+					<label>*<b>Imagen (resolución 1400 x 870 [72ppp])</b></label>
+					<input type="file" id="igsig" name="igsig" required />
+					<div id="txA"></div>
+					<input type="submit" value="Subir e Ingresar" id="nvigal" />
 				</form>
 			</article>
 		</article>
-		<article id="automargen" class="flC">
+		<article id="automargen" class="flB">
 			<?php
 				error_reporting(E_ALL ^ E_NOTICE);
 				$tamno_pagina=15;
@@ -118,26 +116,26 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from galeria order by id_gal desc";
+				$ssql="SELECT * from slider order by id_sli desc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from galeria order by id_gal desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from slider order by id_sli desc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$idSn=$gh['id_gal'];
-					$ttSn=$gh['tit_gal'];
-					$frSn=$gh['fra_gal'];
-					$txSn=$gh['txt_gal'];
-					$feSn=$gh['fe_gal'];			
+					$idSg=$gh['id_sli'];
+					$rtSg=$gh['rut_sli'];
+					$lkSg=$gh['lk_sli'];
+					$frSg=$gh['fra_sli'];					
 			?>
-			<article class="htilf">
-				<h3><?php echo "$ttSn"; ?></h3>
+			<figure>
+				<h3><?php echo "$frSg"; ?></h3>
+				<img src="../../../<?php echo $rtSg ?>" />
 				<figcaption class="columninput">
-					<a id="disbyn" href="modifslinot.php?nt=<?php echo $idSn ?>">Modificar</a>
-					<a class="doll" href="borrislinot.php?br=<?php echo $idSn ?>">Borrar</a>
+					<a href="<?php echo $lkSg ?>" target="_blank"><?php echo "$lkSg"; ?></a>
+					<a class="doll" href="borrisliimages.php?br=<?php echo $idSg ?>">Borrar</a>
 				</figcaption>
-			</article>
+			</figure>
 			<?php
 				}
 			?>
@@ -158,7 +156,7 @@
 						else{
 							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
 				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+							<a href="slider_images.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
 
 				<?php
 						}
