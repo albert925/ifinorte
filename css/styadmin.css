@@ -29,6 +29,30 @@ section{
 		background: #930200;
 		color: #fff;
 	}
+	.condiv div{
+		-webkit-align-items: center;
+		-ms-align-items: center;
+		align-items: center;
+		background: #930200;
+		border-radius: 8px;
+		display: flex;
+		color: #fff;
+		height: 5em;
+		-webkit-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
+		margin-bottom: 1em;
+		padding: 0 0.5em;
+	}
+		.condiv div a{
+			background: #000;
+			color: #fff;
+			padding: 0.5em;
+			text-decoration: none;
+		}
+		.condiv div a:hover,.condiv div a:active{
+			background: #202020;
+		}
 .doll{
 	background: #000;
 	color: #fff;
@@ -90,6 +114,9 @@ section{
 	}
 		#mnad a{
 			border-bottom: 1px solid #ADADAD;
+		}
+		.condiv div{
+			border-radius: 0;
 		}
 	.doll{
 		padding: 0.5em 0;

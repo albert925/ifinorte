@@ -3,6 +3,7 @@ var wvent=$(window).width();
 function inicio_scripadmin () {
 	$("#btA").on("click",abrirA);
 	$("#btB").on("click",abrirB);
+	$("#btC").on("click",abrirC);
 	$(".doll").on("click",confirmborr);
 }
 function confirmborr () {
@@ -15,6 +16,10 @@ function abrirA (ea) {
 function abrirB (eb) {
 	eb.preventDefault();
 	$("#cjB").each(animarB);
+}
+function abrirC (ec) {
+	ec.preventDefault();
+	$("#cjC").each(animarC);
 }
 function animarA () {
 	if (wvent>800) {
@@ -37,6 +42,21 @@ function animarB () {
 	}
 	else{
 		var altoEs="350px";
+	}
+	var alto=$(this).css("height");
+	if (altoEs==alto) {
+		$(this).animate({height:"0"}, 500);
+	}
+	else{
+		$(this).animate({height:altoEs}, 500);
+	}
+}
+function animarC () {
+	if (wvent>800) {
+		var altoEs="150px";
+	}
+	else{
+		var altoEs="250px";
 	}
 	var alto=$(this).css("height");
 	if (altoEs==alto) {
