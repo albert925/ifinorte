@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2015 a las 23:21:39
+-- Tiempo de generación: 15-07-2015 a las 23:28:43
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -43,15 +43,6 @@ INSERT INTO `administrador` (`id_adm`, `user_adm`, `pass_adm`, `tp_adm`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `departamentos`
---
-
-CREATE TABLE IF NOT EXISTS `departamentos` (
-`id_depart` int(11) NOT NULL,
-  `nam_depart` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
-
 -- Estructura de tabla para la tabla `boletin`
 --
 
@@ -60,8 +51,25 @@ CREATE TABLE IF NOT EXISTS `boletin` (
   `tit_bl` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `txt_bl` text COLLATE utf8_spanish_ci NOT NULL,
   `fe_bl` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `boletin`
+--
+
+INSERT INTO `boletin` (`id_bl`, `tit_bl`, `txt_bl`, `fe_bl`) VALUES
+(1, 'titulo', '<p>asd<span style="color:#006400">asdas</span></p>\r\n', '2015-07-15');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+CREATE TABLE IF NOT EXISTS `departamentos` (
+`id_depart` int(11) NOT NULL,
+  `nam_depart` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `departamentos`
@@ -180,6 +188,25 @@ CREATE TABLE IF NOT EXISTS `galeria` (
   `fra_gal` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `txt_gal` text COLLATE utf8_spanish_ci NOT NULL,
   `fe_gal` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `galeria`
+--
+
+INSERT INTO `galeria` (`id_gal`, `tit_gal`, `fra_gal`, `txt_gal`, `fe_gal`) VALUES
+(1, 'Gestionar y optimizar la administraciÃ³n de proyectos y recursos financieros 55', '', '<p>Esto es un mensaje</p>\r\n', '2015-07-14');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gal_mv`
+--
+
+CREATE TABLE IF NOT EXISTS `gal_mv` (
+`id_glmv` int(11) NOT NULL,
+  `tit_glmv` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `fe_glmv` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -203,8 +230,9 @@ CREATE TABLE IF NOT EXISTS `img_galeria` (
 CREATE TABLE IF NOT EXISTS `men_vert` (
 `id_mv` int(11) NOT NULL,
   `nam_mv` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
 -- --------------------------------------------------------
 
 --
@@ -1374,7 +1402,14 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `rut_sli` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
   `lk_sli` varchar(455) COLLATE utf8_spanish_ci NOT NULL,
   `fra_sli` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `slider`
+--
+
+INSERT INTO `slider` (`id_sli`, `rut_sli`, `lk_sli`, `fra_sli`) VALUES
+(2, 'imagenes/galery/delta_1400_870.jpg', 'https://github.com/albert925/ifinorte', 'Titulo2');
 
 -- --------------------------------------------------------
 
@@ -1398,7 +1433,15 @@ CREATE TABLE IF NOT EXISTS `sub_mv` (
 `id_submv` int(11) NOT NULL,
   `mv_id` int(11) NOT NULL,
   `nam_submv` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `sub_mv`
+--
+
+INSERT INTO `sub_mv` (`id_submv`, `mv_id`, `nam_submv`) VALUES
+(1, 24, 'sub1'),
+(2, 26, 'sub12');
 
 -- --------------------------------------------------------
 
@@ -1484,6 +1527,12 @@ ALTER TABLE `galeria`
  ADD PRIMARY KEY (`id_gal`);
 
 --
+-- Indices de la tabla `gal_mv`
+--
+ALTER TABLE `gal_mv`
+ ADD PRIMARY KEY (`id_glmv`);
+
+--
 -- Indices de la tabla `img_galeria`
 --
 ALTER TABLE `img_galeria`
@@ -1550,7 +1599,7 @@ MODIFY `id_adm` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `boletin`
 --
 ALTER TABLE `boletin`
-MODIFY `id_bl` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_bl` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -1585,7 +1634,12 @@ MODIFY `id_fra` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `galeria`
 --
 ALTER TABLE `galeria`
-MODIFY `id_gal` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_gal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `gal_mv`
+--
+ALTER TABLE `gal_mv`
+MODIFY `id_glmv` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `img_galeria`
 --
@@ -1595,7 +1649,7 @@ MODIFY `id_img_gal` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `men_vert`
 --
 ALTER TABLE `men_vert`
-MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT de la tabla `municipios`
 --
@@ -1615,7 +1669,7 @@ MODIFY `id_prov` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `slider`
 --
 ALTER TABLE `slider`
-MODIFY `id_sli` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_sli` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `sub_form`
 --
@@ -1625,7 +1679,7 @@ MODIFY `id_subf` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `sub_mv`
 --
 ALTER TABLE `sub_mv`
-MODIFY `id_submv` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_submv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
@@ -1653,7 +1707,7 @@ ADD CONSTRAINT `doc_mv_ibfk_2` FOREIGN KEY (`submv_id`) REFERENCES `sub_mv` (`id
 -- Filtros para la tabla `img_galeria`
 --
 ALTER TABLE `img_galeria`
-ADD CONSTRAINT `img_galeria_ibfk_1` FOREIGN KEY (`gal_id`) REFERENCES `galeria` (`id_gal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `img_galeria_ibfk_1` FOREIGN KEY (`gal_id`) REFERENCES `gal_mv` (`id_glmv`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `municipios`
