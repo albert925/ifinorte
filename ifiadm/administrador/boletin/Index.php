@@ -92,7 +92,7 @@
 	</header>
 	<nav id="mnad">
 		<a href="../contenido/menus.php">Ver Menús v.</a>
-		<a id="btC" href="../contenido/submenus.php">Nuevo Submenu v</a>
+		<a href="../contenido/submenus.php">Ver Submenu v</a>
 		<a href="../conmenv">Contenido</a>
 	</nav>
 	<section>
