@@ -16,9 +16,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar menus verticales" />
+	<meta name="description" content="Administrar submenus" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Menus| Ifinorte</title>
+	<title>admin Submenus| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -85,25 +85,40 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btC" href="#"> Nuevo Menú v.</a>
-		<a href="../contenido/submenus.php">Submenus</a>
+		<a href="../contenido/menus.php">Ver Menús v.</a>
+		<a id="btC" href="../contenido/submenus.php">Nuevo Submenu v</a>
 		<a href="../conmenv">Contenido</a>
 	</nav>
 	<section>
-		<h1>Menú vertical</h1>
+		<h1>Submenús vertical</h1>
 		<article id="cjC" class="oulcajas">
 			<article id="automargen">
 				<form action="#" method="post" class="columninput">
+					<label>*<b>Del Menú</b></label>
+					<select id="mnvR">
+						<option value="0">Selecione</option>
+						<?php
+							$Tmv="SELECT * from men_vert order by nam_mv asc";
+							$sql_tmv=mysql_query($Tmv,$conexion) or die (mysql_error());
+							while ($tv=mysql_fetch_array($sql_tmv)) {
+								$idM=$tv['id_mv'];
+								$nmM=$tv['nam_mv'];
+						?>
+						<option value="<?php echo $idM ?>"><?php echo "$nmM"; ?></option>
+						<?php
+							}
+						?>
+					</select>
 					<label>*<b>Nombre</b></label>
-					<input type="text" id="nmmv" name="nmmv" required />
+					<input type="text" id="nmsbmv" name="nmsbmv" required />
 					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvmnmv" />
+					<input type="submit" value="Ingresar" id="nvsbmv" />
 				</form>
 			</article>
 		</article>
 		<article id="automargen">
 			<p>
-				Nota: Si va a elimianr un menú se borrará todo que esté relacionado a ese menú.
+				Nota: Si va a elimianr un Submenú se borrará todo que esté relacionado a ese menú.
 			</p>
 		</article>
 		<article id="automargen" class="flB">
@@ -118,21 +133,41 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from men_vert order by id_mv desc";
+				$ssql="SELECT * from sub_mv order by id_submv desc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from men_vert order by id_mv desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from sub_mv order by id_submv desc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$idmv=$gh['id_mv'];
-					$namv=$gh['nam_mv'];					
+					$idsbmv=$gh['id_submv'];
+					$mvsbmv=$gh['mv_id'];
+					$namsv=$gh['nam_submv'];					
 			?>
 			<article class="columninput">
-				<input type="text" id="mfnv_<?php echo $idmv ?>" value="<?php echo $namv ?>" />
-				<div id="txB_<?php echo $idmv ?>"></div>
-				<input type="submit" value="Modificar" class="mofmv" data-id="<?php echo $idmv ?>" />
-				<a class="doll" href="borr_menuv.php?br=<?php echo $idmv ?>">Borrar</a>
+				<select id="selmP_<?php echo $idsbmv ?>">
+					<?php
+						$tOmv="SELECT * from men_vert order by nam_mv asc";
+						$sql_Otmv=mysql_query($tOmv,$conexion) or die (mysql_error());
+						while ($Ov=mysql_fetch_array($sql_Otmv)) {
+							$idOM=$Ov['id_mv'];
+							$nmOM=$Ov['nam_mv'];
+							if ($idOM==$mvsbmv) {
+								$selmenu="selected";
+							}
+							else{
+								$selmenu="";
+							}
+					?>
+					<option value="<?php echo $idOM ?>" <?php echo $selmenu ?>><?php echo "$nmOM"; ?></option>
+					<?php
+						}
+					?>
+				</select>
+				<input type="text" id="mfsbnv_<?php echo $idsbmv ?>" value="<?php echo $namsv ?>" />
+				<div id="txB_<?php echo $idsbmv ?>"></div>
+				<input type="submit" value="Modificar" class="mofsubmv" data-id="<?php echo $idsbmv ?>" />
+				<a class="doll" href="borr_submenuv.php?br=<?php echo $idsbmv ?>">Borrar</a>
 			</article>
 			<?php
 				}
@@ -154,7 +189,7 @@
 						else{
 							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
 				?>
-							<a href="menus.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+							<a href="submenus.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
 
 				<?php
 						}
