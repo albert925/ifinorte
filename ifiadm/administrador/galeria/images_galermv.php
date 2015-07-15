@@ -85,94 +85,33 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btC" href="#">Nuevo galeria</a>
+		<a href="../galeria">Ver galerias</a>
 		<a href="images_galermv.php">Nuevo Imagen galeria</a>
 	</nav>
 	<section>
-		<h1>Galerias</h1>
-		<article id="cjC" class="oulcajas">
-			<article id="automargen">
-				<form action="#" method="post" class="columninput">
-					<label>*<b>Titulo</b></label>
-					<input type="text" id="nmglmv" name="nmglmv" required />
-					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvgalme" />
-				</form>
-			</article>
-		</article>
-		<article id="automargen" class="flB">
-			<?php
-				error_reporting(E_ALL ^ E_NOTICE);
-				$tamno_pagina=15;
-				$pagina= $_GET['pagina'];
-				if (!$pagina) {
-					$inicio=0;
-					$pagina=1;
-				}
-				else{
-					$inicio= ($pagina - 1)*$tamno_pagina;
-				}
-				$ssql="SELECT * from gal_mv order by id_glmv desc";
-				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-				$num_total_registros= mysql_num_rows($rs);
-				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from gal_mv order by id_glmv desc limit $inicio, $tamno_pagina";
-				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-				while ($gh=mysql_fetch_array($impsql)) {
-					$idgl=$gh['id_glmv'];
-					$nagl=$gh['tit_glmv'];
-					$fegl=$gh['fe_glmv'];
-					$primerimg="SELECT * from img_galeria where gal_id=$idgl order by id_img_gal asc limit 1";
-					$sql_primer=mysql_query($primerimg,$conexion) or die (mysql_error());
-					$numprumer=mysql_num_rows($sql_primer);
-					if ($numprumer>0) {
-						while ($yt=mysql_fetch_array($sql_primer)) {
-							$idtrG=$yt['id_img_gal'];
-							$ruttrG=$yt['rut_gal'];
-						}
-					}
-					else{
-						$idtrG=0;
-						$ruttrG="imagenes/predeterminado.png";
-					}
-			?>
-			<figure>
-				<img src="../../../<?php echo $ruttrG ?>" alt="<?php echo $nagl ?>" />
-				<figcaption class="columninput">
-					<input type="text" id="mfgl_<?php echo $idgl ?>" value="<?php echo $nagl ?>" />
-					<div id="txB_<?php echo $idgl ?>"></div>
-					<input type="submit" value="Modificar Nombre" class="mofml" data-id="<?php echo $idgl ?>" />
-					<a id="disbyn" href="galermv_images.php?gl=<?php echo $idgl ?>">Imágenes</a>
-					<a class="doll" href="borr_glamv.php?br=<?php echo $idgl ?>">Borrar</a>
-				</figcaption>
-			</figure>
-			<?php
-				}
-			?>
-		</article>
+		<h1>Imagenes Galerias</h1>
 		<article id="automargen">
-			<br />
-			<b>Páginas: </b>
-			<?php
-				//muestro los distintos indices de las paginas
-				if ($total_paginas>1) {
-					for ($i=1; $i <=$total_paginas ; $i++) { 
-						if ($pagina==$i) {
-							//si muestro el indice del la pagina actual, no coloco enlace
-				?>
-					<b><?php echo $pagina." "; ?></b>
-				<?php
+			<form action="#" method="post" enctype="multipart/form-data" id="nvG" class="columninput">
+				<label>*<b>De la galeria</b></label>
+				<select id="idglv" name="idglv">
+					<option value="0">Seleccione</option>
+					<?php
+						$Tgl="SELECT * from gal_mv order by id_glmv desc";
+						$sql_tgl=mysql_query($Tgl,$conexion) or die (mysql_error());
+						while ($lg=mysql_fetch_array($sql_tgl)) {
+							$idGv=$lg['id_glmv'];
+							$nmGv=$lg['tit_glmv'];
+					?>
+					<option value="<?php echo $idGv ?>"><?php echo "$nmGv"; ?></option>
+					<?php
 						}
-						else{
-							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-				<?php
-						}
-					}
-				}
-			?>
+					?>
+				</select>
+				<label>*<b>Imagen</b></label>
+				<input type="file" id="igmglv" name="igmglv" required />
+				<div id="tximage"></div>
+				<input type="submit" value="Ingresar" id="nuevimngv" />
+			</form>
 		</article>
 	</section>
 	<footer>

@@ -10,6 +10,23 @@
 			$usad=$ad['user_adm'];
 			$tpad=$ad['tp_adm'];
 		}
+		$idR=$_GET['gl'];
+		if ($idR=="") {
+			echo "<script type='text/javascript'>";
+				echo "alert('id de galeria no disponible');";
+				echo "var pagina='../galeria';";
+				echo "document.location.href=pagina;";
+			echo "</script>";
+		}
+		else{
+			$datos="SELECT * from gal_mv where id_glmv=$idR";
+			$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
+			$numdatos=mysql_num_rows($sql_datos);
+			if ($numdatos>0) {
+				while ($dt=mysql_fetch_array($sql_datos)) {
+					$nagl=$dt['tit_glmv'];
+					$fegl=$dt['fe_glmv'];	
+				}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +35,7 @@
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
 	<meta name="description" content="Administrar menus verticales" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Galerias| Ifinorte</title>
+	<title>admin imágenes de <?php echo "$nagl"; ?>| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -85,18 +102,19 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btC" href="#">Nuevo galeria</a>
-		<a href="images_galermv.php">Nuevo Imagen galeria</a>
+		<a href="../galeria">Ver galerias</a>
+		<a id="btC" href="images_galermv.php">Nuevo Imagen</a>
 	</nav>
 	<section>
-		<h1>Galerias</h1>
+		<h1>Imágenes <?php echo "$nagl"; ?></h1>
 		<article id="cjC" class="oulcajas">
 			<article id="automargen">
-				<form action="#" method="post" class="columninput">
-					<label>*<b>Titulo</b></label>
-					<input type="text" id="nmglmv" name="nmglmv" required />
-					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvgalme" />
+				<form action="#" method="post" enctype="multipart/form-data" id="nvG" class="columninput">
+					<input type="text" id="idglv" name="idglv" value="<?php echo $idR ?>" required style="display:none;" />
+					<label>*<b>Nuevo Imagen</b></label>
+					<input type="file" id="igmglv" name="igmglv" required />
+					<div id="tximage"></div>
+					<input type="submit" value="Ingresar" id="nuevimngv" />
 				</form>
 			</article>
 		</article>
@@ -112,38 +130,20 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from gal_mv order by id_glmv desc";
+				$ssql="SELECT * from img_galeria where gal_id=$idR order by id_img_gal asc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from gal_mv order by id_glmv desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from img_galeria where gal_id=$idR order by id_img_gal asc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$idgl=$gh['id_glmv'];
-					$nagl=$gh['tit_glmv'];
-					$fegl=$gh['fe_glmv'];
-					$primerimg="SELECT * from img_galeria where gal_id=$idgl order by id_img_gal asc limit 1";
-					$sql_primer=mysql_query($primerimg,$conexion) or die (mysql_error());
-					$numprumer=mysql_num_rows($sql_primer);
-					if ($numprumer>0) {
-						while ($yt=mysql_fetch_array($sql_primer)) {
-							$idtrG=$yt['id_img_gal'];
-							$ruttrG=$yt['rut_gal'];
-						}
-					}
-					else{
-						$idtrG=0;
-						$ruttrG="imagenes/predeterminado.png";
-					}
+					$idgl=$gh['id_img_gal'];
+					$rutgl=$gh['rut_gal'];			
 			?>
 			<figure>
-				<img src="../../../<?php echo $ruttrG ?>" alt="<?php echo $nagl ?>" />
+				<img src="../../../<?php echo $rutgl ?>" alt="<?php echo $idgl ?>" />
 				<figcaption class="columninput">
-					<input type="text" id="mfgl_<?php echo $idgl ?>" value="<?php echo $nagl ?>" />
-					<div id="txB_<?php echo $idgl ?>"></div>
-					<input type="submit" value="Modificar Nombre" class="mofml" data-id="<?php echo $idgl ?>" />
-					<a id="disbyn" href="galermv_images.php?gl=<?php echo $idgl ?>">Imágenes</a>
-					<a class="doll" href="borr_glamv.php?br=<?php echo $idgl ?>">Borrar</a>
+					<a class="doll" href="borr_img_galmv.php?br=<?php echo $idgl ?>&gl=<?php echo $idR ?>">Borrar</a>
 				</figcaption>
 			</figure>
 			<?php
@@ -166,7 +166,7 @@
 						else{
 							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
 				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+							<a href="galermv_images.php?gl=<?php echo $idR ?>&pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
 
 				<?php
 						}
@@ -205,6 +205,15 @@
 </body>
 </html>
 <?php
+			}
+			else{
+				echo "<script type='text/javascript'>";
+					echo "alert('Galeria no existe o eliminada');";
+					echo "var pagina='../galeria';";
+					echo "document.location.href=pagina;";
+				echo "</script>";
+			}
+		}
 	}
 	else{
 		echo "<script type='text/javascript'>";
