@@ -51,6 +51,18 @@ CREATE TABLE IF NOT EXISTS `departamentos` (
   `nam_depart` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+
+-- Estructura de tabla para la tabla `boletin`
+--
+
+CREATE TABLE IF NOT EXISTS `boletin` (
+`id_bl` int(11) NOT NULL,
+  `tit_bl` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `txt_bl` text COLLATE utf8_spanish_ci NOT NULL,
+  `fe_bl` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
 --
 -- Volcado de datos para la tabla `departamentos`
 --
@@ -1424,6 +1436,12 @@ ALTER TABLE `administrador`
  ADD PRIMARY KEY (`id_adm`);
 
 --
+-- Indices de la tabla `boletin`
+--
+ALTER TABLE `boletin`
+ ADD PRIMARY KEY (`id_bl`);
+
+--
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
@@ -1528,6 +1546,11 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `administrador`
 MODIFY `id_adm` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `boletin`
+--
+ALTER TABLE `boletin`
+MODIFY `id_bl` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
