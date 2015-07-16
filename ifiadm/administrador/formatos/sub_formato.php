@@ -16,9 +16,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar menus verticales" />
+	<meta name="description" content="Administrar formatos" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Formatos| Ifinorte</title>
+	<title>admin Subformatos| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -85,19 +85,34 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btC" href="#">Nuevo Formato</a>
-		<a href="sub_formato.php">Sub formatos</a>
+		<a href="../formatos">Ver Formatos</a>
+		<a id="btC" href="sub_formato.php">Nuevo Sub formatos</a>
 		<a href="doc_formatos.php">Nuevo archivo de formatos</a>
 	</nav>
 	<section>
-		<h1>Formatos</h1>
+		<h1>Sub Formatos</h1>
 		<article id="cjC" class="oulcajas">
 			<article id="automargen">
 				<form action="#" method="post" class="columninput">
+					<label>*<b>Del Formato</b></label>
+					<select id="fmsl">
+						<option value="0">Selecione</option>
+						<?php
+							$Tsel="SELECT * from formatos order by id_form desc";
+							$sql_tsel=mysql_query($Tsel,$conexion) or die (mysql_error());
+							while ($fmT=mysql_fetch_array($sql_tsel)) {
+								$Ttidfm=$fmT['id_form'];
+								$Ttnmfm=$fmT['tit_form'];
+						?>
+						<option value="<?php echo $Ttidfm ?>"><?php echo "$Ttnmfm"; ?></option>
+						<?php
+							}
+						?>
+					</select>
 					<label>*<b>Titulo</b></label>
-					<input type="text" id="nmfm" name="nmfm" required />
-					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvform" />
+					<input type="text" id="sbfm" name="sbfm" required />
+					<div id="txC"></div>
+					<input type="submit" value="Ingresar" id="nvsbform" />
 				</form>
 			</article>
 		</article>
@@ -113,23 +128,41 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from formatos order by id_form desc";
+				$ssql="SELECT * from sub_form order by id_subf desc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from formatos order by id_form desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from sub_form order by id_subf desc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$idfo=$gh['id_form'];
-					$nafo=$gh['tit_form'];
-					$fefo=$gh['fe_form'];
+					$idsbfo=$gh['id_subf'];
+					$nasbfo=$gh['tit_subf'];
+					$fosbfo=$gh['form_id'];
 			?>
 			<article class="columninput">
-				<input type="text" id="mffm_<?php echo $idfo ?>" value="<?php echo $nafo ?>" />
-				<div id="txB_<?php echo $idfo ?>"></div>
-				<input type="submit" value="Modificar" class="camfmf" data-id="<?php echo $idfo ?>" />
-				<a id="disbyn" href="formatos_doc.php?fo=<?php echo $idfo ?>">Documentos</a>
-				<a class="doll" href="borr_formato.php?br=<?php echo $idfo ?>">Borrar</a>
+				<select id="fidf_<?php echo $idsbfo ?>">
+					<?php
+						$FrP="SELECT * from formatos order by id_form desc";
+						$sqfrp=mysql_query($FrP,$conexion) or die (mysql_error());
+						while ($pf=mysql_fetch_array($sqfrp)) {
+							$idfm=$pf['id_form'];
+							$nmfm=$pf['tit_form'];
+							if ($idfm==$fosbfo) {
+								$selformat="selected";
+							}
+							else{
+								$selformat="";
+							}
+					?>
+					<option value="<?php echo $idfm ?>" <?php echo $selformat ?>><?php echo "$nmfm"; ?></option>
+					<?php
+						}
+					?>
+				</select>
+				<input type="text" id="mfsfm_<?php echo $idsbfo ?>" value="<?php echo $nasbfo ?>" />
+				<div id="txB_<?php echo $idsbfo ?>"></div>
+				<input type="submit" value="Modificar" class="camsbfmsbf" data-id="<?php echo $idsbfo ?>" />
+				<a class="doll" href="borr_subformato.php?br=<?php echo $idsbfo ?>">Borrar</a>
 			</article>
 			<?php
 				}
@@ -151,7 +184,7 @@
 						else{
 							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
 				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+							<a href="sub_formato.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
 
 				<?php
 						}
