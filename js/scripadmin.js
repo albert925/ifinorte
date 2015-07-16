@@ -4,6 +4,7 @@ function inicio_scripadmin () {
 	$("#btA").on("click",abrirA);
 	$("#btB").on("click",abrirB);
 	$("#btC").on("click",abrirC);
+	$("#fmsl").on("change",buscarsubformato);
 	$(".doll").on("click",confirmborr);
 }
 function confirmborr () {
@@ -65,4 +66,13 @@ function animarC () {
 	else{
 		$(this).animate({height:altoEs}, 500);
 	}
+}
+function buscarsubformato () {
+	var fR=$("#fmsl").val();
+	$("#ldsl").text("Buscando..");
+	$.post("busc_subformato.php",{a:fR},colocarsubform);
+}
+function colocarsubform (rfmsb) {
+	$("#ldsl").text("");
+	$("#subfmsl").html(rfmsb);
 }
