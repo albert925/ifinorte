@@ -10,15 +10,32 @@
 			$usad=$ad['user_adm'];
 			$tpad=$ad['tp_adm'];
 		}
+		$idR=$_GET['fo'];
+		if ($idR=="") {
+			echo "<script type='text/javascript'>";
+				echo "alert('id formato no disponible');";
+				echo "var pagina='../formatos';";
+				echo "document.location.href=pagina;";
+			echo "</script>";
+		}
+		else{
+			$datos="SELECT * from formatos where id_form=$idR";
+			$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
+			$numdatos=mysql_num_rows($sql_datos);
+			if ($numdatos>0) {
+				while ($dt=mysql_fetch_array($sql_datos)) {
+					$nafo=$dt['tit_form'];
+					$fefo=$dt['fe_form'];
+				}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar formatos" />
+	<meta name="description" content="Administrar archivos <?php echo $nafo ?>" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Subformatos| Ifinorte</title>
+	<title>admin <?php echo "$nafo"; ?>| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -86,49 +103,92 @@
 	</header>
 	<nav id="mnad">
 		<a href="../formatos">Ver Formatos</a>
-		<a href="sub_formato.php">Ver Sub formatos</a>
-		<a href="doc_formatos.php">Nuevo archivo de formatos</a>
+		<a href="sub_formato.php">Sub formatos</a>
+		<a id="btC" href="doc_formatos.php">Nuevo archivo</a>
 	</nav>
 	<section>
-		<h1>Archivos de formatos y sub</h1>
+		<h1>Archivos <?php echo "$nafo"; ?></h1>
+		<article id="cjC" class="oulcajas">
+			<article id="automargen">
+				<form action="#" method="post" enctype="multipart/form-data" id="nvArch" class="columninput">
+					<input type="text" id="fmsl" name="fmsl" value="<?php echo $idR ?>" required style="display:none;" />
+					<label><b>Del Sub formato</b></label>
+					<select id="subfmsl" name="subfmsl">
+						<option value="0">Selecione</option>
+						<?php
+							$Tdsmb="SELECT * from sub_form where form_id=$idR order by id_subf desc";
+							$sql_sub=mysql_query($Tdsmb,$conexion) or die (mysql_error());
+							while ($sb=mysql_fetch_array($sql_sub)) {
+								$idsbfo=$sb['id_subf'];
+								$nasbfo=$sb['tit_subf'];
+						?>
+						<option value="<?php echo $idsbfo ?>"><?php echo "$nasbfo"; ?></option>
+						<?php
+							}
+						?>
+					</select>
+					<label>*<b>Archivo</b></label>
+					<input type="file" id="acfm" name="acfm" required />
+					<div id="msacrh"></div>
+					<input type="submit" value="Ingresar" id="nvsarch" />
+				</form>
+			</article>
+		</article>
+		<article id="automargen" class="flB">
+			<?php
+				error_reporting(E_ALL ^ E_NOTICE);
+				$tamno_pagina=15;
+				$pagina= $_GET['pagina'];
+				if (!$pagina) {
+					$inicio=0;
+					$pagina=1;
+				}
+				else{
+					$inicio= ($pagina - 1)*$tamno_pagina;
+				}
+				$ssql="SELECT * from doc_form where form_id=$idR order by id_doc_form asc";
+				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
+				$num_total_registros= mysql_num_rows($rs);
+				$total_paginas= ceil($num_total_registros / $tamno_pagina);
+				$gsql="SELECT * from doc_form where form_id=$idR order by id_doc_form asc limit $inicio, $tamno_pagina";
+				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
+				while ($gh=mysql_fetch_array($impsql)) {
+					$idar=$gh['id_doc_form'];
+					$ifdar=$gh['form_id'];
+					$sbfidar=$gh['sub_id'];
+					$rutar=$gh['rut_doc'];
+			?>
+			<article class="columninput">
+				<a href="../../../<?php echo $rutar ?>"><?php echo "$rutar"; ?></a>
+				<a class="doll" href="borr_archivo.php?br=<?php echo $idar ?>&ff=<?php echo $idR ?>">Borrar</a>
+			</article>
+			<?php
+				}
+			?>
+		</article>
 		<article id="automargen">
-			<form action="#" method="post"  enctype="multipart/form-data" id="nvArch" class="columninput">
-				<label>*<b>Del Formato</b></label>
-				<select id="fmsl" name="fmsl">
-					<option value="0">Selecione</option>
-					<?php
-						$Tsel="SELECT * from formatos order by id_form desc";
-						$sql_tsel=mysql_query($Tsel,$conexion) or die (mysql_error());
-						while ($fmT=mysql_fetch_array($sql_tsel)) {
-							$Ttidfm=$fmT['id_form'];
-							$Ttnmfm=$fmT['tit_form'];
-					?>
-					<option value="<?php echo $Ttidfm ?>"><?php echo "$Ttnmfm"; ?></option>
-					<?php
+			<br />
+			<b>Páginas: </b>
+			<?php
+				//muestro los distintos indices de las paginas
+				if ($total_paginas>1) {
+					for ($i=1; $i <=$total_paginas ; $i++) { 
+						if ($pagina==$i) {
+							//si muestro el indice del la pagina actual, no coloco enlace
+				?>
+					<b><?php echo $pagina." "; ?></b>
+				<?php
 						}
-					?>
-				</select>
-				<div id="ldsl"></div>
-				<label><b>Del Sub formato</b></label>
-				<select id="subfmsl" name="subfmsl">
-					<option value="0">Selecione</option>
-					<?php
-						$Tdsmb="SELECT * from sub_form order by id_subf desc";
-						$sql_sub=mysql_query($Tdsmb,$conexion) or die (mysql_error());
-						while ($sb=mysql_fetch_array($sql_sub)) {
-							$idsbfo=$sb['id_subf'];
-							$nasbfo=$sb['tit_subf'];
-					?>
-					<option value="<?php echo $idsbfo ?>"><?php echo "$nasbfo"; ?></option>
-					<?php
+						else{
+							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
+				?>
+							<a href="formatos_doc.php?fo=<?php echo $idR ?>&pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+
+				<?php
 						}
-					?>
-				</select>
-				<label>*<b>Archivo</b></label>
-				<input type="file" id="acfm" name="acfm" required />
-				<div id="msacrh"></div>
-				<input type="submit" value="Ingresar" id="nvsarch" />
-			</form>
+					}
+				}
+			?>
 		</article>
 	</section>
 	<footer>
@@ -161,6 +221,15 @@
 </body>
 </html>
 <?php
+			}
+			else{
+				echo "<script type='text/javascript'>";
+					echo "alert('Formato no existe o eliminado');";
+					echo "var pagina='../formatos';";
+					echo "document.location.href=pagina;";
+				echo "</script>";
+			}
+		}
 	}
 	else{
 		echo "<script type='text/javascript'>";

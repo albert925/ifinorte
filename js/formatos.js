@@ -2,6 +2,7 @@ $(document).on("ready",inicio_formato);
 function inicio_formato () {
 	$("#nvform").on("click",nuevo_formato);
 	$("#nvsbform").on("click",nuevo_subformato);
+	$("#nvsarch").on("click",nuevo_archivo);
 	$(".camfmf").on("click",mof_formato);
 	$(".camsbfmsbf").on("click",mof_subfortmato);
 }
@@ -117,5 +118,71 @@ function mof_subfortmato () {
 				}
 			});
 		}
+	}
+}
+function nuevo_archivo () {
+	var arfm=$("#fmsl").val();
+	var arsbfm=$("#subfmsl").val();
+	var arc=$("#acfm")[0].files[0];
+	var namearc=arc.name;
+	var extearc=namearc.substring(namearc.lastIndexOf('.')+1);
+	var tamarc=arc.size;
+	var tipoarc=arc.type;
+	if (arfm=="0" || arfm=="") {
+		$("#msacrh").css(mal).text ("Id de formato no disponible");
+		return false;
+	}
+	else{
+		$("#msacrh").css(mal).text ("");
+		var formu=new FormData($("#nvArch")[0]);
+		$.ajax({
+			url: '../../../nuevoarchivo.php',
+			type: 'POST',
+			data: formu,
+			cache: false,
+			contentType: false,
+			processData: false,
+			beforeSend:function () {
+				$("#msacrh").prepend("<center><img src='../../../imagenes/loadingb.gif' alt='loading' style='width:20px;' /></center>");
+			},
+			success:function reulimg (dtst) {
+			if (dtst=="2") {
+				$("#msacrh").css(mal).text("Carpeta sin permisos o resolución de imagen no permitido");
+				$("#msacrh").fadeIn();$("#msacrh").fadeOut(3000);
+				return false;
+			}
+			else{
+				if (dtst=="3") {
+					$("#msacrh").css(mal).text("Tamaño no permitido");
+					$("#msacrh").fadeIn();$("#msacrh").fadeOut(3000);
+					return false;
+				}
+				else{
+					if (dtst=="4") {
+						$("#msacrh").css(mal).text("Carpeta sin permisos");
+						$("#msacrh").fadeIn();$("#msacrh").fadeOut(3000);
+						return false;
+					}
+					else{
+						if (dtst=="5") {
+							$("#msacrh").css(bien).text("Archivo subido");
+							$("#msacrh").fadeIn();$("#msacrh").fadeOut(3000);
+							window.location.href="formatos_doc.php?fo="+arfm;
+						}
+						else{
+							$("#msacrh").css(mal).html(dtst);
+							$("#msacrh").fadeIn();
+							return false;
+						}
+					}
+				}
+			}
+		},
+			error:function () {
+				$("#msacrh").css(mal).text("Ocurrió un error");
+				$("#msacrh").fadeIn();$("#msacrh").fadeOut(3000);
+			}
+		});
+		return false;
 	}
 }
