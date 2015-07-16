@@ -95,9 +95,9 @@
 			<article id="automargen">
 				<form action="#" method="post" class="columninput">
 					<label>*<b>Titulo</b></label>
-					<input type="text" id="nmglmv" name="nmglmv" required />
+					<input type="text" id="nmfm" name="nmfm" required />
 					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvgalme" />
+					<input type="submit" value="Ingresar" id="nvform" />
 				</form>
 			</article>
 		</article>
@@ -125,6 +125,9 @@
 					$fefo=$gh['fe_form'];
 			?>
 			<article class="columninput">
+				<input type="text" id="mffm_<?php echo $idfo ?>" value="<?php echo $nafo ?>" />
+				<div id="txB_<?php echo $idfo ?>"></div>
+				<input type="submit" value="Modificar" class="camfmf" data-id="<?php echo $idfo ?>" />
 				<a id="disbyn" href="formatos_doc.php?fo=<?php echo $idfo ?>">Documentos</a>
 				<a class="doll" href="borr_formato.php?br=<?php echo $idfo ?>">Borrar</a>
 			</article>
