@@ -5,6 +5,7 @@ function inicio_scripadmin () {
 	$("#btB").on("click",abrirB);
 	$("#btC").on("click",abrirC);
 	$("#fmsl").on("change",buscarsubformato);
+	$("#slmnv").on("change",buscarsubmenu);
 	$(".doll").on("click",confirmborr);
 }
 function confirmborr () {
@@ -75,4 +76,13 @@ function buscarsubformato () {
 function colocarsubform (rfmsb) {
 	$("#ldsl").text("");
 	$("#subfmsl").html(rfmsb);
+}
+function buscarsubmenu () {
+	var mv=$("#slmnv").val();
+	$("#tld").text("Buscando submenu..");
+	$.post("buscar_submenu.php",{a:mv},colocarsubmenu);
+}
+function colocarsubmenu (vmrv) {
+	$("#tld").text("");
+	$("#slsbv").html(vmrv);
 }
