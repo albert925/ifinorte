@@ -107,13 +107,25 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btA" href="#">Nuevo Contenido</a>
+		<a href="../conmenv">Ver Contenidos</a>
 	</nav>
 	<section>
 		<h1><?php echo "$ttdc"; ?></h1>
-		<article id="cjA" class="oulcajas">
-			<article id="automargen">
-				<form action="../../../new_contenido.php" method="post" enctype="multipart/form-data" class="columninput">
+		<article id="automargen" class="flexmoff">
+			<article>
+				<h2>Cambiar Archivo</h2>
+				<form action="#" method="post" enctype="multipart/form-data" id="cmbarch" class="columninput">
+					<input type="text" id="idct" name="idct" value="<?php echo $idR ?>" required style="display:none;" />
+					<a href="../../../<?php echo $rtdc ?>" target="_blank"><?php echo "$rtdc"; ?></a>
+					<input type="file" id="afarch" name="afarch" required />
+					<div id="ccA"></div>
+					<input type="submit" value="Modificar y subir" id="camarch"  />
+				</form>
+			</article>
+			<article>
+				<h2>Modifcar datos</h2>
+				<form action="modifc_cont.php" method="post" class="columninput">
+					<input type="text" id="irct" name="irct" value="<?php echo $idR ?>" required style="display:none;" />
 					<label>*<b>Del Menu</b></label>
 					<select id="slmnv" name="slmnv">
 						<option value="0">Selecione	</option>
@@ -123,8 +135,14 @@
 							while ($mn=mysql_fetch_array($sql_tdmn)) {
 								$idmv=$mn['id_mv'];
 								$namv=$mn['nam_mv'];
+								if ($idmv==$mvdc) {
+									$selmenu="selected";
+								}
+								else{
+									$selmenu="";
+								}
 						?>
-						<option value="<?php echo $idmv ?>"><?php echo "$namv"; ?></option>
+						<option value="<?php echo $idmv ?>" <?php echo $selmenu ?>><?php echo "$namv"; ?></option>
 						<?php
 							}
 						?>
@@ -139,23 +157,27 @@
 							while ($bsb=mysql_fetch_array($sqlsb)) {
 								$idsbmv=$bsb['id_submv'];
 								$namsv=$bsb['nam_submv'];
+								if ($idsbmv==$svdc) {
+									$selsubm="selected";
+								}
+								else{
+									$selsubm="";
+								}
 						?>
-						<option value="<?php echo $idsbmv ?>"><?php echo "$namsv"; ?></option>
+						<option value="<?php echo $idsbmv ?>" <?php echo $selsubm ?>><?php echo "$namsv"; ?></option>
 						<?php
 							}
 						?>
 					</select>
 					<label>*<b>Titulo</b></label>
-					<input type="text" id="titcont" name="titcont" required />
-					<label>*<b>Archivo</b></label>
-					<input type="file" id="arcct" name="arcct" required />
+					<input type="text" id="titcont" name="titcont" value="<?php echo $ttdc ?>" required />
 					<label>*<b>Texto</b></label>
-					<textarea id="editor1" name="txtcont"></textarea>
+					<textarea id="editor1" name="txtcont"><?php echo "$txdc"; ?></textarea>
 					<script>
 						CKEDITOR.replace('txtcont');
 					</script>
 					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvcont" />
+					<input type="submit" value="Modificar" id="nvcont" />
 				</form>
 			</article>
 		</article>
