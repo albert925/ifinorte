@@ -94,50 +94,6 @@
 		<h1>Contenidos</h1>
 		<article id="cjA" class="oulcajas">
 			<article id="automargen">
-				<form action="../../../new_contenido.php" method="post" enctype="multipart/form-data" class="columninput">
-					<label>*<b>Del Menu</b></label>
-					<select id="slmnv" name="slmnv">
-						<option value="0">Selecione</option>
-						<?php
-							$Tdmn="SELECT * from men_vert order by id_mv desc";
-							$sql_tdmn=mysql_query($Tdmn,$conexion) or die (mysql_error());
-							while ($mn=mysql_fetch_array($sql_tdmn)) {
-								$idmv=$mn['id_mv'];
-								$namv=$mn['nam_mv'];
-						?>
-						<option value="<?php echo $idmv ?>"><?php echo "$namv"; ?></option>
-						<?php
-							}
-						?>
-					</select>
-					<div id="tld"></div>
-					<label><b>Del submenu</b></label>
-					<select id="slsbv" name="slsbv">
-						<option value="0">Selecione</option>
-						<?php
-							$Tsb="SELECT * from sub_mv order by id_submv desc";
-							$sqlsb=mysql_query($Tsb,$conexion) or die (mysql_error());
-							while ($bsb=mysql_fetch_array($sqlsb)) {
-								$idsbmv=$bsb['id_submv'];
-								$namsv=$bsb['nam_submv'];
-						?>
-						<option value="<?php echo $idsbmv ?>"><?php echo "$namsv"; ?></option>
-						<?php
-							}
-						?>
-					</select>
-					<label>*<b>Titulo</b></label>
-					<input type="text" id="titcont" name="titcont" required />
-					<label>*<b>Archivo</b></label>
-					<input type="file" id="arcct" name="arcct" required />
-					<label>*<b>Texto</b></label>
-					<textarea id="editor1" name="txtcont"></textarea>
-					<script>
-						CKEDITOR.replace('txtcont');
-					</script>
-					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvcont" />
-				</form>
 			</article>
 		</article>
 		<article id="automargen" class="flB">
