@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2015 a las 23:10:54
+-- Tiempo de generación: 18-07-2015 a las 00:53:40
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -287,7 +287,14 @@ INSERT INTO `men_vert` (`id_mv`, `nam_mv`) VALUES
 CREATE TABLE IF NOT EXISTS `mn_porf` (
 `id_mn_po` int(11) NOT NULL,
   `nam_po` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `mn_porf`
+--
+
+INSERT INTO `mn_porf` (`id_mn_po`, `nam_po`) VALUES
+(1, 'menu 1');
 
 -- --------------------------------------------------------
 
@@ -1744,7 +1751,7 @@ MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 -- AUTO_INCREMENT de la tabla `mn_porf`
 --
 ALTER TABLE `mn_porf`
-MODIFY `id_mn_po` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_mn_po` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `municipios`
 --
@@ -1814,6 +1821,12 @@ ADD CONSTRAINT `img_galeria_ibfk_1` FOREIGN KEY (`gal_id`) REFERENCES `gal_mv` (
 --
 ALTER TABLE `municipios`
 ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`depart_id`) REFERENCES `departamentos` (`id_depart`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `portafolio`
+--
+ALTER TABLE `portafolio`
+ADD CONSTRAINT `portafolio_ibfk_1` FOREIGN KEY (`mn_pid`) REFERENCES `mn_porf` (`id_mn_po`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `sub_form`

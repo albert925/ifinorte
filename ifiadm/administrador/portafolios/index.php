@@ -27,7 +27,7 @@
 	<script src="../../../js/jquery_2_1_1.js"></script>
 	<script src="../../../js/scripag.js"></script>
 	<script src="../../../js/scripadmin.js"></script>
-	<script src="../../../js/contendio.js"></script>
+	<script src="../../../js/portafolio.js"></script>
 	<script src="../../../ckeditor/ckeditor.js"></script>
 </head>
 <body>
@@ -87,13 +87,25 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btA" href="#">Nuevo Contenido</a>
+		<a id="btA" href="#">Nuevo portafolio</a>
 		<a href="../portafolios/menuport.php">Tipos protafolios</a>
 	</nav>
 	<section>
-		<h1>Contenidos</h1>
+		<h1>Portafolios</h1>
 		<article id="cjA" class="oulcajas">
 			<article id="automargen">
+				<form action="#" method="post" class="columninput">
+					<label>*<b>Del tipo portafolio (Menus portafolio)</b></label>
+					<select id="slmnpp" name="slmnpp"></select>
+					<label>*<b>Titulo</b></label>
+					<input type="text" id="ttpp" name="ttpp" required />
+					<label><b>Texto</b></label>
+					<textarea id="editor1" name="txtpp"></textarea>
+					<script>
+						CKEDITOR.replace('txtpp');
+					</script>
+					<input type="submit" value="Ingresar" id="valppp" />
+				</form>
 			</article>
 		</article>
 		<article id="automargen" class="flB">
@@ -108,25 +120,19 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from doc_mv order by id_doc_mv desc";
+				$ssql="SELECT * from portafolio order by id_port desc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from doc_mv order by id_doc_mv desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from portafolio order by id_port desc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$iddc=$gh['id_doc_mv'];
-					$ttdc=$gh['tit_mv'];
-					$mvdc=$gh['mv_id'];
-					$svdc=$gh['submv_id'];
-					$rtdc=$gh['rut_docmv'];
-					$txdc=$gh['txt_mv'];
-					$fedc=$gh['fe_mv'];
+					$iddc=$gh['id_port'];
 			?>
 			<article class="columninput">
 				<h2><?php echo "$ttdc"; ?></h2>
-				<a id="disbyn" href="moficicontenido.php?co=<?php echo $iddc ?>">Modificar</a>
-				<a class="doll" href="borr_contenido.php?br=<?php echo $iddc ?>">Borrar</a>
+				<a id="disbyn" href="moficiportafolio.php?co=<?php echo $iddc ?>">Modificar</a>
+				<a class="doll" href="borr_portafolio.php?br=<?php echo $iddc ?>">Borrar</a>
 			</article>
 			<?php
 				}

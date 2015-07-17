@@ -81,7 +81,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="3">
-						<a href="portafolios">Portafolio de servicios</a>
+						<a href="../portafolios">Portafolio de servicios</a>
 						<ul class="children3">
 							<li><a href="../portafolios/menuport.php">Menus protafolios</a></li>
 							<li><a href="../portafolios">Portafolios</a></li>

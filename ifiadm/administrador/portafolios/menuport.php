@@ -16,9 +16,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar formatos" />
+	<meta name="description" content="Administrar Portafolios" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Subformatos| Ifinorte</title>
+	<title>admin portafolios| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -27,7 +27,8 @@
 	<script src="../../../js/jquery_2_1_1.js"></script>
 	<script src="../../../js/scripag.js"></script>
 	<script src="../../../js/scripadmin.js"></script>
-	<script src="../../../js/formatos.js"></script>
+	<script src="../../../js/portafolio.js"></script>
+	<script src="../../../ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<header>
@@ -53,7 +54,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
-						<a class="sell" href="../contenido">Contenido P</a>
+						<a href="../contenido">Contenido P</a>
 						<ul class="children2">
 							<li><a href="../contenido/menus.php">Menus Vertical</a></li>
 							<li><a href="../contenido/submenus.php">Submenus Vertical</a></li>
@@ -64,7 +65,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="3">
-						<a href="../portafolios">Portafolio de servicios</a>
+						<a class="sell" href="portafolios">Portafolio de servicios</a>
 						<ul class="children3">
 							<li><a href="../portafolios/menuport.php">Menus protafolios</a></li>
 							<li><a href="../portafolios">Portafolios</a></li>
@@ -86,50 +87,74 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a href="../formatos">Ver Formatos</a>
-		<a href="sub_formato.php">Ver Sub formatos</a>
-		<a href="doc_formatos.php">Nuevo archivo de formatos</a>
+		<a href="../portafolios">Ver portafolios</a>
+		<a href="../portafolios/menuport.php">Tipos protafolios</a>
 	</nav>
 	<section>
-		<h1>Archivos de formatos y sub</h1>
-		<article id="automargen">
-			<form action="#" method="post"  enctype="multipart/form-data" id="nvArch" class="columninput">
-				<label>*<b>Del Formato</b></label>
-				<select id="fmsl" name="fmsl">
-					<option value="0">Selecione</option>
-					<?php
-						$Tsel="SELECT * from formatos order by id_form desc";
-						$sql_tsel=mysql_query($Tsel,$conexion) or die (mysql_error());
-						while ($fmT=mysql_fetch_array($sql_tsel)) {
-							$Ttidfm=$fmT['id_form'];
-							$Ttnmfm=$fmT['tit_form'];
-					?>
-					<option value="<?php echo $Ttidfm ?>"><?php echo "$Ttnmfm"; ?></option>
-					<?php
-						}
-					?>
-				</select>
-				<div id="ldsl"></div>
-				<label><b>Del Sub formato</b></label>
-				<select id="subfmsl" name="subfmsl">
-					<option value="0">Selecione</option>
-					<?php
-						$Tdsmb="SELECT * from sub_form order by id_subf desc";
-						$sql_sub=mysql_query($Tdsmb,$conexion) or die (mysql_error());
-						while ($sb=mysql_fetch_array($sql_sub)) {
-							$idsbfo=$sb['id_subf'];
-							$nasbfo=$sb['tit_subf'];
-					?>
-					<option value="<?php echo $idsbfo ?>"><?php echo "$nasbfo"; ?></option>
-					<?php
-						}
-					?>
-				</select>
-				<label>*<b>Archivo</b></label>
-				<input type="file" id="acfm" name="acfm" required />
-				<div id="msacrh"></div>
-				<input type="submit" value="Ingresar" id="nvsarch" />
+		<h1>Tipos o menu portafolio</h1>
+		<article id="automargen" style="padding-bottom:1em;">
+			<form action="#" method="post" class="columninput">
+				<label><b>Nombre</b></label>
+				<input type="text" id="titppp" required />
+				<div id="txA"></div>
+				<input type="submit" value="Ingresar" id="nvmmpp" />
 			</form>
+		</article>
+		<article id="automargen" class="flB">
+			<?php
+				error_reporting(E_ALL ^ E_NOTICE);
+				$tamno_pagina=15;
+				$pagina= $_GET['pagina'];
+				if (!$pagina) {
+					$inicio=0;
+					$pagina=1;
+				}
+				else{
+					$inicio= ($pagina - 1)*$tamno_pagina;
+				}
+				$ssql="SELECT * from mn_porf order by id_mn_po desc";
+				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
+				$num_total_registros= mysql_num_rows($rs);
+				$total_paginas= ceil($num_total_registros / $tamno_pagina);
+				$gsql="SELECT * from mn_porf order by id_mn_po desc limit $inicio, $tamno_pagina";
+				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
+				while ($gh=mysql_fetch_array($impsql)) {
+					$idmnpp=$gh['id_mn_po'];
+					$nmmnpp=$gh['nam_po'];
+			?>
+			<article class="columninput">
+				<input type="text" id="titmn_<?php echo $idmnpp ?>" value="<?php echo $nmmnpp ?>" />
+				<div id="txB_<?php echo $idmnpp ?>"></div>
+				<input type="submit" value="Modificar" class="ccpp" data-id="<?php echo $idmnpp ?>" />
+				<a class="doll" href="borr_menufolio.php?br=<?php echo $idmnpp ?>">Borrar</a>
+			</article>
+			<?php
+				}
+			?>
+		</article>
+		<article id="automargen">
+			<br />
+			<b>Páginas: </b>
+			<?php
+				//muestro los distintos indices de las paginas
+				if ($total_paginas>1) {
+					for ($i=1; $i <=$total_paginas ; $i++) { 
+						if ($pagina==$i) {
+							//si muestro el indice del la pagina actual, no coloco enlace
+				?>
+					<b><?php echo $pagina." "; ?></b>
+				<?php
+						}
+						else{
+							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
+				?>
+							<a href="menuport.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+
+				<?php
+						}
+					}
+				}
+			?>
 		</article>
 	</section>
 	<footer>
