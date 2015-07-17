@@ -10,36 +10,15 @@
 			$usad=$ad['user_adm'];
 			$tpad=$ad['tp_adm'];
 		}
-		$idR=$_GET['co'];
-		if ($idR=="") {
-			echo "<script type='text/javascript'>";
-				echo "alert('id contenido no disponible');";
-				echo "var pagina='../conmenv';";
-				echo "document.location.href=pagina;";
-			echo "</script>";
-		}
-		else{
-			$datos="SELECT * from doc_mv where id_doc_mv=$idR";
-			$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
-			$numdatos=mysql_num_rows($sql_datos);
-			if ($numdatos>0) {
-				while ($dt=mysql_fetch_array($sql_datos)) {
-					$ttdc=$dt['tit_mv'];
-					$mvdc=$dt['mv_id'];
-					$svdc=$dt['submv_id'];
-					$rtdc=$dt['rut_docmv'];
-					$txdc=$dt['txt_mv'];
-					$fedc=$dt['fe_mv'];
-				}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar <?php echo $ttdc ?>" />
+	<meta name="description" content="Administrar Portafolios" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin <?php echo "$ttdc"; ?>| Ifinorte</title>
+	<title>admin portafolios| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -75,7 +54,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
-						<a class="sell" href="../contenido">Contenido P</a>
+						<a href="../contenido">Contenido P</a>
 						<ul class="children2">
 							<li><a href="../contenido/menus.php">Menus Vertical</a></li>
 							<li><a href="../contenido/submenus.php">Submenus Vertical</a></li>
@@ -86,7 +65,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="3">
-						<a href="portafolios">Portafolio de servicios</a>
+						<a class="sell" href="portafolios">Portafolio de servicios</a>
 						<ul class="children3">
 							<li><a href="../portafolios/menuport.php">Menus protafolios</a></li>
 							<li><a href="../portafolios">Portafolios</a></li>
@@ -108,42 +87,25 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a href="../conmenv">Ver Contenidos</a>
+		<a id="btA" href="#">Nuevo Contenido</a>
+		<a href="../portafolios/menuport.php">Tipos protafolios</a>
 	</nav>
 	<section>
-		<h1><?php echo "$ttdc"; ?></h1>
-		<article id="automargen" class="flexmoff">
-			<article>
-				<h2>Cambiar Archivo</h2>
-				<form action="#" method="post" enctype="multipart/form-data" id="cmbarch" class="columninput">
-					<input type="text" id="idct" name="idct" value="<?php echo $idR ?>" required style="display:none;" />
-					<a href="../../../<?php echo $rtdc ?>" target="_blank"><?php echo "$rtdc"; ?></a>
-					<input type="file" id="afarch" name="afarch" required />
-					<div id="ccA"></div>
-					<input type="submit" value="Modificar y subir" id="camarch"  />
-				</form>
-			</article>
-			<article>
-				<h2>Modifcar datos</h2>
-				<form action="modifc_cont.php" method="post" class="columninput">
-					<input type="text" id="irct" name="irct" value="<?php echo $idR ?>" required style="display:none;" />
+		<h1>Contenidos</h1>
+		<article id="cjA" class="oulcajas">
+			<article id="automargen">
+				<form action="../../../new_contenido.php" method="post" enctype="multipart/form-data" class="columninput">
 					<label>*<b>Del Menu</b></label>
 					<select id="slmnv" name="slmnv">
-						<option value="0">Selecione	</option>
+						<option value="0">Selecione</option>
 						<?php
 							$Tdmn="SELECT * from men_vert order by id_mv desc";
 							$sql_tdmn=mysql_query($Tdmn,$conexion) or die (mysql_error());
 							while ($mn=mysql_fetch_array($sql_tdmn)) {
 								$idmv=$mn['id_mv'];
 								$namv=$mn['nam_mv'];
-								if ($idmv==$mvdc) {
-									$selmenu="selected";
-								}
-								else{
-									$selmenu="";
-								}
 						?>
-						<option value="<?php echo $idmv ?>" <?php echo $selmenu ?>><?php echo "$namv"; ?></option>
+						<option value="<?php echo $idmv ?>"><?php echo "$namv"; ?></option>
 						<?php
 							}
 						?>
@@ -158,29 +120,85 @@
 							while ($bsb=mysql_fetch_array($sqlsb)) {
 								$idsbmv=$bsb['id_submv'];
 								$namsv=$bsb['nam_submv'];
-								if ($idsbmv==$svdc) {
-									$selsubm="selected";
-								}
-								else{
-									$selsubm="";
-								}
 						?>
-						<option value="<?php echo $idsbmv ?>" <?php echo $selsubm ?>><?php echo "$namsv"; ?></option>
+						<option value="<?php echo $idsbmv ?>"><?php echo "$namsv"; ?></option>
 						<?php
 							}
 						?>
 					</select>
 					<label>*<b>Titulo</b></label>
-					<input type="text" id="titcont" name="titcont" value="<?php echo $ttdc ?>" required />
+					<input type="text" id="titcont" name="titcont" required />
+					<label>*<b>Archivo</b></label>
+					<input type="file" id="arcct" name="arcct" required />
 					<label>*<b>Texto</b></label>
-					<textarea id="editor1" name="txtcont"><?php echo "$txdc"; ?></textarea>
+					<textarea id="editor1" name="txtcont"></textarea>
 					<script>
 						CKEDITOR.replace('txtcont');
 					</script>
 					<div id="txA"></div>
-					<input type="submit" value="Modificar" id="nvcont" />
+					<input type="submit" value="Ingresar" id="nvcont" />
 				</form>
 			</article>
+		</article>
+		<article id="automargen" class="flB">
+			<?php
+				error_reporting(E_ALL ^ E_NOTICE);
+				$tamno_pagina=15;
+				$pagina= $_GET['pagina'];
+				if (!$pagina) {
+					$inicio=0;
+					$pagina=1;
+				}
+				else{
+					$inicio= ($pagina - 1)*$tamno_pagina;
+				}
+				$ssql="SELECT * from doc_mv order by id_doc_mv desc";
+				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
+				$num_total_registros= mysql_num_rows($rs);
+				$total_paginas= ceil($num_total_registros / $tamno_pagina);
+				$gsql="SELECT * from doc_mv order by id_doc_mv desc limit $inicio, $tamno_pagina";
+				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
+				while ($gh=mysql_fetch_array($impsql)) {
+					$iddc=$gh['id_doc_mv'];
+					$ttdc=$gh['tit_mv'];
+					$mvdc=$gh['mv_id'];
+					$svdc=$gh['submv_id'];
+					$rtdc=$gh['rut_docmv'];
+					$txdc=$gh['txt_mv'];
+					$fedc=$gh['fe_mv'];
+			?>
+			<article class="columninput">
+				<h2><?php echo "$ttdc"; ?></h2>
+				<a id="disbyn" href="moficicontenido.php?co=<?php echo $iddc ?>">Modificar</a>
+				<a class="doll" href="borr_contenido.php?br=<?php echo $iddc ?>">Borrar</a>
+			</article>
+			<?php
+				}
+			?>
+		</article>
+		<article id="automargen">
+			<br />
+			<b>Páginas: </b>
+			<?php
+				//muestro los distintos indices de las paginas
+				if ($total_paginas>1) {
+					for ($i=1; $i <=$total_paginas ; $i++) { 
+						if ($pagina==$i) {
+							//si muestro el indice del la pagina actual, no coloco enlace
+				?>
+					<b><?php echo $pagina." "; ?></b>
+				<?php
+						}
+						else{
+							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
+				?>
+							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
+
+				<?php
+						}
+					}
+				}
+			?>
 		</article>
 	</section>
 	<footer>
@@ -213,15 +231,6 @@
 </body>
 </html>
 <?php
-			}
-			else{
-				echo "<script type='text/javascript'>";
-					echo "alert('Contenido no existe o elimnado');";
-					echo "var pagina='../conmenv';";
-					echo "document.location.href=pagina;";
-				echo "</script>";
-			}
-		}
 	}
 	else{
 		echo "<script type='text/javascript'>";

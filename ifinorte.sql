@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2015 a las 23:28:43
+-- Tiempo de generación: 17-07-2015 a las 23:10:54
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -132,7 +132,14 @@ CREATE TABLE IF NOT EXISTS `doc_form` (
   `form_id` int(11) NOT NULL,
   `sub_id` int(11) DEFAULT NULL,
   `rut_doc` varchar(455) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `doc_form`
+--
+
+INSERT INTO `doc_form` (`id_doc_form`, `form_id`, `sub_id`, `rut_doc`) VALUES
+(10, 3, NULL, 'documents/Silver.docx');
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,16 @@ CREATE TABLE IF NOT EXISTS `doc_mv` (
   `rut_docmv` varchar(455) COLLATE utf8_spanish_ci NOT NULL,
   `txt_mv` text COLLATE utf8_spanish_ci NOT NULL,
   `fe_mv` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `doc_mv`
+--
+
+INSERT INTO `doc_mv` (`id_doc_mv`, `tit_mv`, `mv_id`, `submv_id`, `rut_docmv`, `txt_mv`, `fe_mv`) VALUES
+(4, 'contenido1', 24, NULL, 'documents/01_Integracion de Assets.pdf', '', '2015-07-17'),
+(5, 'contenido2', 26, 2, 'documents/factura_Albert Steward Arias(1).pdf', '', '2015-07-17'),
+(6, 'diseÃ±o', 24, NULL, 'documents/01_Diseno de Logica.pdf', '', '2015-07-17');
 
 -- --------------------------------------------------------
 
@@ -160,7 +176,15 @@ CREATE TABLE IF NOT EXISTS `formatos` (
 `id_form` int(11) NOT NULL,
   `tit_form` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `fe_form` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `formatos`
+--
+
+INSERT INTO `formatos` (`id_form`, `tit_form`, `fe_form`) VALUES
+(1, 'formato1', '2015-07-16'),
+(3, 'formato2', '2015-07-16');
 
 -- --------------------------------------------------------
 
@@ -207,7 +231,14 @@ CREATE TABLE IF NOT EXISTS `gal_mv` (
 `id_glmv` int(11) NOT NULL,
   `tit_glmv` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `fe_glmv` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `gal_mv`
+--
+
+INSERT INTO `gal_mv` (`id_glmv`, `tit_glmv`, `fe_glmv`) VALUES
+(3, 'galeria 3', '2015-07-15');
 
 -- --------------------------------------------------------
 
@@ -219,7 +250,14 @@ CREATE TABLE IF NOT EXISTS `img_galeria` (
 `id_img_gal` int(11) NOT NULL,
   `gal_id` int(11) NOT NULL,
   `rut_gal` varchar(4555) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `img_galeria`
+--
+
+INSERT INTO `img_galeria` (`id_img_gal`, `gal_id`, `rut_gal`) VALUES
+(2, 3, 'imagenes/galbb/fox-snow-running-winter.jpg');
 
 -- --------------------------------------------------------
 
@@ -233,6 +271,24 @@ CREATE TABLE IF NOT EXISTS `men_vert` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `men_vert`
+--
+
+INSERT INTO `men_vert` (`id_mv`, `nam_mv`) VALUES
+(24, 'menu1'),
+(26, 'menu2');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mn_porf`
+--
+
+CREATE TABLE IF NOT EXISTS `mn_porf` (
+`id_mn_po` int(11) NOT NULL,
+  `nam_po` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -1381,6 +1437,20 @@ CREATE TABLE IF NOT EXISTS `noticias` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `portafolio`
+--
+
+CREATE TABLE IF NOT EXISTS `portafolio` (
+`id_port` int(11) NOT NULL,
+  `mn_pid` int(11) NOT NULL,
+  `tit_port` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `txt_port` text COLLATE utf8_spanish_ci NOT NULL,
+  `fe_port` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proveedor`
 --
 
@@ -1421,7 +1491,15 @@ CREATE TABLE IF NOT EXISTS `sub_form` (
 `id_subf` int(11) NOT NULL,
   `form_id` int(11) NOT NULL,
   `tit_subf` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `sub_form`
+--
+
+INSERT INTO `sub_form` (`id_subf`, `form_id`, `tit_subf`) VALUES
+(2, 1, 'sub2'),
+(4, 1, 'sub3');
 
 -- --------------------------------------------------------
 
@@ -1433,7 +1511,7 @@ CREATE TABLE IF NOT EXISTS `sub_mv` (
 `id_submv` int(11) NOT NULL,
   `mv_id` int(11) NOT NULL,
   `nam_submv` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `sub_mv`
@@ -1545,6 +1623,12 @@ ALTER TABLE `men_vert`
  ADD PRIMARY KEY (`id_mv`);
 
 --
+-- Indices de la tabla `mn_porf`
+--
+ALTER TABLE `mn_porf`
+ ADD PRIMARY KEY (`id_mn_po`);
+
+--
 -- Indices de la tabla `municipios`
 --
 ALTER TABLE `municipios`
@@ -1555,6 +1639,12 @@ ALTER TABLE `municipios`
 --
 ALTER TABLE `noticias`
  ADD PRIMARY KEY (`id_nt`);
+
+--
+-- Indices de la tabla `portafolio`
+--
+ALTER TABLE `portafolio`
+ ADD PRIMARY KEY (`id_port`), ADD KEY `mn_pid` (`mn_pid`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -1614,17 +1704,17 @@ MODIFY `id_dic` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `doc_form`
 --
 ALTER TABLE `doc_form`
-MODIFY `id_doc_form` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_doc_form` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `doc_mv`
 --
 ALTER TABLE `doc_mv`
-MODIFY `id_doc_mv` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_doc_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `formatos`
 --
 ALTER TABLE `formatos`
-MODIFY `id_form` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_form` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `frases`
 --
@@ -1639,17 +1729,22 @@ MODIFY `id_gal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `gal_mv`
 --
 ALTER TABLE `gal_mv`
-MODIFY `id_glmv` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_glmv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `img_galeria`
 --
 ALTER TABLE `img_galeria`
-MODIFY `id_img_gal` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_img_gal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `men_vert`
 --
 ALTER TABLE `men_vert`
-MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `mn_porf`
+--
+ALTER TABLE `mn_porf`
+MODIFY `id_mn_po` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `municipios`
 --
@@ -1660,6 +1755,11 @@ MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1113;
 --
 ALTER TABLE `noticias`
 MODIFY `id_nt` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `portafolio`
+--
+ALTER TABLE `portafolio`
+MODIFY `id_port` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
@@ -1674,12 +1774,12 @@ MODIFY `id_sli` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `sub_form`
 --
 ALTER TABLE `sub_form`
-MODIFY `id_subf` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_subf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `sub_mv`
 --
 ALTER TABLE `sub_mv`
-MODIFY `id_submv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_submv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
