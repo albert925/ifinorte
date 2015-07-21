@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2015 a las 00:53:40
+-- Tiempo de generación: 22-07-2015 a las 00:54:34
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -117,9 +117,10 @@ INSERT INTO `departamentos` (`id_depart`, `nam_depart`) VALUES
 
 CREATE TABLE IF NOT EXISTS `directivos` (
 `id_dic` int(11) NOT NULL,
+  `dc_id` int(11) NOT NULL,
   `nam_dic` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `txt_dic` text COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -287,7 +288,7 @@ INSERT INTO `men_vert` (`id_mv`, `nam_mv`) VALUES
 CREATE TABLE IF NOT EXISTS `mn_porf` (
 `id_mn_po` int(11) NOT NULL,
   `nam_po` varchar(255) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `mn_porf`
@@ -1453,7 +1454,15 @@ CREATE TABLE IF NOT EXISTS `portafolio` (
   `tit_port` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `txt_port` text COLLATE utf8_spanish_ci NOT NULL,
   `fe_port` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `portafolio`
+--
+
+INSERT INTO `portafolio` (`id_port`, `mn_pid`, `tit_port`, `txt_port`, `fe_port`) VALUES
+(2, 1, 'titulo1', '<p>sadas</p>\r\n', '2015-07-21'),
+(3, 1, 'titulo2', '<p>zxczxczxc</p>\r\n', '2015-07-21');
 
 -- --------------------------------------------------------
 
@@ -1531,6 +1540,25 @@ INSERT INTO `sub_mv` (`id_submv`, `mv_id`, `nam_submv`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tp_dic`
+--
+
+CREATE TABLE IF NOT EXISTS `tp_dic` (
+`id_tpdc` int(11) NOT NULL,
+  `man_tpdc` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tp_dic`
+--
+
+INSERT INTO `tp_dic` (`id_tpdc`, `man_tpdc`) VALUES
+(1, 'perfil 1'),
+(2, 'perfil 2');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -1579,7 +1607,7 @@ ALTER TABLE `departamentos`
 -- Indices de la tabla `directivos`
 --
 ALTER TABLE `directivos`
- ADD PRIMARY KEY (`id_dic`);
+ ADD PRIMARY KEY (`id_dic`), ADD KEY `dc_id` (`dc_id`);
 
 --
 -- Indices de la tabla `doc_form`
@@ -1678,6 +1706,12 @@ ALTER TABLE `sub_mv`
  ADD PRIMARY KEY (`id_submv`), ADD KEY `mv_id` (`mv_id`);
 
 --
+-- Indices de la tabla `tp_dic`
+--
+ALTER TABLE `tp_dic`
+ ADD PRIMARY KEY (`id_tpdc`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -1706,7 +1740,7 @@ MODIFY `id_depart` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 -- AUTO_INCREMENT de la tabla `directivos`
 --
 ALTER TABLE `directivos`
-MODIFY `id_dic` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_dic` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `doc_form`
 --
@@ -1751,7 +1785,7 @@ MODIFY `id_mv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 -- AUTO_INCREMENT de la tabla `mn_porf`
 --
 ALTER TABLE `mn_porf`
-MODIFY `id_mn_po` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id_mn_po` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `municipios`
 --
@@ -1766,7 +1800,7 @@ MODIFY `id_nt` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `portafolio`
 --
 ALTER TABLE `portafolio`
-MODIFY `id_port` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_port` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
@@ -1788,6 +1822,11 @@ MODIFY `id_subf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 ALTER TABLE `sub_mv`
 MODIFY `id_submv` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT de la tabla `tp_dic`
+--
+ALTER TABLE `tp_dic`
+MODIFY `id_tpdc` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -1795,6 +1834,12 @@ MODIFY `id_us` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `directivos`
+--
+ALTER TABLE `directivos`
+ADD CONSTRAINT `directivos_ibfk_1` FOREIGN KEY (`dc_id`) REFERENCES `tp_dic` (`id_tpdc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `doc_form`
