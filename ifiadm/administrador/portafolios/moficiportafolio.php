@@ -10,6 +10,25 @@
 			$usad=$ad['user_adm'];
 			$tpad=$ad['tp_adm'];
 		}
+		$idR=$_GET['co'];
+		if ($idR=="") {
+			echo "<script type='text/javascript'>";
+				echo "alert('id portafolio no disponible');";
+				echo "var pagina='../portafolios';";
+				echo "document.location.href=pagina;";
+			echo "</script>";
+		}
+		else{
+			$datos="SELECT * from portafolio where id_port=$idR";
+			$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
+			$numdatos=mysql_num_rows($sql_datos);
+			if ($numdatos>0) {
+				while ($dt=mysql_fetch_array($sql_datos)) {
+					$tpdc=$dt['mn_pid'];
+					$nmdc=$dt['tit_port'];
+					$txdc=$dt['txt_port'];
+					$fedc=$dt['fe_port'];
+				}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +37,7 @@
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
 	<meta name="description" content="Administrar Portafolios" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin portafolios| Ifinorte</title>
+	<title><?php echo "$nmdc"; ?>| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -87,97 +106,44 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btA" href="#">Nuevo portafolio</a>
+		<a href="../portafolios">Ver portafolios</a>
 		<a href="../portafolios/menuport.php">Tipos protafolios</a>
 	</nav>
 	<section>
-		<h1>Portafolios</h1>
-		<article id="cjA" class="oulcajas">
-			<article id="automargen">
-				<form action="new_portafolio.php" method="post" class="columninput">
-					<label>*<b>Del tipo portafolio (Menus portafolio)</b></label>
-					<select id="slmnpp" name="slmnpp">
-						<option value="0">Seleccione</option>
-						<?php
-							$Tmnpt="SELECT * from mn_porf order by nam_po asc";
-							$sql_tppf=mysql_query($Tmnpt,$conexion) or die (mysql_error());
-							while ($mtp=mysql_fetch_array($sql_tppf)) {
-								$idpfpt=$mtp['id_mn_po'];
-								$nmpfpt=$mtp['nam_po'];
-						?>
-						<option value="<?php echo $idpfpt ?>"><?php echo "$nmpfpt"; ?></option>
-						<?php
-							}
-						?>
-					</select>
-					<label>*<b>Titulo</b></label>
-					<input type="text" id="ttpp" name="ttpp" required />
-					<label><b>Texto</b></label>
-					<textarea id="editor1" name="txtpp"></textarea>
-					<script>
-						CKEDITOR.replace('txtpp');
-					</script>
-					<input type="submit" value="Ingresar" id="valppp" />
-				</form>
-			</article>
-		</article>
-		<article id="automargen" class="flB">
-			<?php
-				error_reporting(E_ALL ^ E_NOTICE);
-				$tamno_pagina=15;
-				$pagina= $_GET['pagina'];
-				if (!$pagina) {
-					$inicio=0;
-					$pagina=1;
-				}
-				else{
-					$inicio= ($pagina - 1)*$tamno_pagina;
-				}
-				$ssql="SELECT * from portafolio order by id_port desc";
-				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-				$num_total_registros= mysql_num_rows($rs);
-				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from portafolio order by id_port desc limit $inicio, $tamno_pagina";
-				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-				while ($gh=mysql_fetch_array($impsql)) {
-					$iddc=$gh['id_port'];
-					$tpdc=$gh['mn_pid'];
-					$nmdc=$gh['tit_port'];
-					$txdc=$gh['txt_port'];
-					$fedc=$gh['fe_port'];
-			?>
-			<article class="columninput">
-				<h2><?php echo "$nmdc"; ?></h2>
-				<a id="disbyn" href="moficiportafolio.php?co=<?php echo $iddc ?>">Modificar</a>
-				<a class="doll" href="borr_portafolio.php?br=<?php echo $iddc ?>">Borrar</a>
-			</article>
-			<?php
-				}
-			?>
-		</article>
+		<h1><?php echo "$nmdc"; ?></h1>
 		<article id="automargen">
-			<br />
-			<b>Páginas: </b>
-			<?php
-				//muestro los distintos indices de las paginas
-				if ($total_paginas>1) {
-					for ($i=1; $i <=$total_paginas ; $i++) { 
-						if ($pagina==$i) {
-							//si muestro el indice del la pagina actual, no coloco enlace
-				?>
-					<b><?php echo $pagina." "; ?></b>
-				<?php
+			<form action="modifc_portafolio.php" method="post" class="columninput">
+				<input type="text" id="idpt" name="idpt" value="<?php echo $idR ?>" required style="display:none;" />
+				<label>*<b>Del tipo portafolio (Menus portafolio)</b></label>
+				<select id="slmnpp" name="slmnpp">
+					<option value="0">Seleccione</option>
+					<?php
+						$Tmnpt="SELECT * from mn_porf order by nam_po asc";
+						$sql_tppf=mysql_query($Tmnpt,$conexion) or die (mysql_error());
+						while ($mtp=mysql_fetch_array($sql_tppf)) {
+							$idpfpt=$mtp['id_mn_po'];
+							$nmpfpt=$mtp['nam_po'];
+							if ($idpfpt==$tpdc) {
+								$seltipo="selected";
+							}
+							else{
+								$seltipo="";
+							}
+					?>
+					<option value="<?php echo $idpfpt ?>" <?php echo $seltipo ?>><?php echo "$nmpfpt"; ?></option>
+					<?php
 						}
-						else{
-							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-				<?php
-						}
-					}
-				}
-			?>
+					?>
+				</select>
+				<label>*<b>Titulo</b></label>
+				<input type="text" id="ttpp" name="ttpp" value="<?php echo $nmdc ?>" required />
+				<label><b>Texto</b></label>
+				<textarea id="editor1" name="txtpp"><?php echo "$txdc"; ?></textarea>
+				<script>
+					CKEDITOR.replace('txtpp');
+				</script>
+				<input type="submit" value="Modificar" id="valppp" />
+			</form>
 		</article>
 	</section>
 	<footer>
@@ -210,6 +176,15 @@
 </body>
 </html>
 <?php
+			}
+			else{
+				echo "<script type='text/javascript'>";
+				echo "alert('Portafolio no existe o ha sido eliminado');";
+					echo "var pagina='../portafolios';";
+					echo "document.location.href=pagina;";
+				echo "</script>";
+			}
+		}
 	}
 	else{
 		echo "<script type='text/javascript'>";

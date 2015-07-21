@@ -1,6 +1,7 @@
 $(document).on("ready",inicio_portafolio);
 function inicio_portafolio () {
 	$("#nvmmpp").on("click",nuevo_menu_pp);
+	$("#valppp").on("click",validar_pppp);
 	$(".ccpp").on("click",modif_menupp);
 }
 var bien={color:"#006600"};
@@ -53,5 +54,15 @@ function modif_menupp () {
 				$("#txB_"+ida).css(mal).html(tpmn);
 			}
 		});
+	}
+}
+function validar_pppp () {
+	var pva=$("#slmnpp").val();
+	if (pva=="0" || pva=="") {
+		alert("Selecione del tipo portafolio");
+		return false;
+	}
+	else{
+		return true;
 	}
 }
