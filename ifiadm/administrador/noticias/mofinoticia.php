@@ -10,15 +10,35 @@
 			$usad=$ad['user_adm'];
 			$tpad=$ad['tp_adm'];
 		}
+		$idR=$_GET['co'];
+		if ($idR=="") {
+			echo "<script type='text/javascript'>";
+				echo "alert('id de noticia no disponible');";
+				echo "var pagina='../noticias';";
+				echo "document.location.href=pagina;";
+			echo "</script>";
+		}
+		else{
+			$datos="SELECT * from noticias where id_nt=$idR";
+			$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
+			$Numdatos=mysql_num_rows($sql_datos);
+			if ($Numdatos>0) {
+				while ($dt=mysql_fetch_array($sql_datos)) {
+					$nmnt=$dt['tit_nt'];
+					$rtnt=$dt['rut_nt'];
+					$rsnt=$dt['res_nt'];
+					$xtnt=$dt['txt_nt'];
+					$fent=$dt['fe_nt'];
+				}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar Perfiles" />
+	<meta name="description" content="Administrar Noticias" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin noticias| Ifinorte</title>
+	<title>admin <?php echo "$nmnt"; ?>| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -87,86 +107,36 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btA" href="#">Nuevo Noticia</a>
+		<a href="../noticias">Ver Noticias</a>
 	</nav>
 	<section>
-		<h1>Noticias</h1>
-		<article id="cjA" class="oulcajas">
-			<article id="automargen">
-				<form action="../../../new_noticia.php" method="post" enctype="multipart/form-data" class="columninput">
-					<label>*<b>Titulo</b></label>
-					<input type="text" id="ttnt" name="ttnt" required />
-					<label><b>Imagen (visualizacion miniatura - resolución 1400x870)</b></label>
-					<input type="file" id="gmnt" name="gmnt" />
-					<label><b>Resumen</b></label>
-					<textarea name="restnt" required></textarea>
-					<label><b>Texto</b></label>
-					<textarea id="editor1" name="txtnt"></textarea>
-					<script>
-						CKEDITOR.replace('txtnt');
-					</script>
-					<input type="submit" value="Ingresar" id="valdc" />
-				</form>
-			</article>
-		</article>
-		<article id="automargen" class="flB">
-			<?php
-				error_reporting(E_ALL ^ E_NOTICE);
-				$tamno_pagina=15;
-				$pagina= $_GET['pagina'];
-				if (!$pagina) {
-					$inicio=0;
-					$pagina=1;
-				}
-				else{
-					$inicio= ($pagina - 1)*$tamno_pagina;
-				}
-				$ssql="SELECT * from noticias order by id_nt desc";
-				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-				$num_total_registros= mysql_num_rows($rs);
-				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from noticias order by id_nt desc limit $inicio, $tamno_pagina";
-				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-				while ($gh=mysql_fetch_array($impsql)) {
-					$idnt=$gh['id_nt'];
-					$nmnt=$gh['tit_nt'];
-					$rtnt=$gh['rut_nt'];
-					$rsnt=$gh['res_nt'];
-					$xtnt=$gh['txt_nt'];
-					$fent=$gh['fe_nt'];
-			?>
-			<article class="columninput">
-				<h2><?php echo "$nmnt"; ?></h2>
-				<a id="disbyn" href="mofinoticia.php?co=<?php echo $idnt ?>">Modificar</a>
-				<a class="doll" href="borr_noticia.php?br=<?php echo $idnt ?>">Borrar</a>
-			</article>
-			<?php
-				}
-			?>
+		<h1><?php echo "$nmnt"; ?></h1>
+		<article id="automargen">
+			<h2>Cambiar Imagen</h2>
+			<label>resolución 1400x870</label>
+			<form action="#" method="post" enctype="multipart/form-data" id="ffgm" class="columninput">
+				<input type="text" id="ridnt" name="ridnt" value="<?php echo $idR ?>" required style="display:none;" />
+				<a href="../../../<?php echo $rtnt ?>" target="_blank"><?php echo "$rtnt"; ?></a>
+				<input type="file" id="lgmnt" name="lgmnt" required />
+				<div id="txA"></div>
+				<input type="submit" value="Subir y modificar" id="camimgnt" />
+			</form>
 		</article>
 		<article id="automargen">
-			<br />
-			<b>Páginas: </b>
-			<?php
-				//muestro los distintos indices de las paginas
-				if ($total_paginas>1) {
-					for ($i=1; $i <=$total_paginas ; $i++) { 
-						if ($pagina==$i) {
-							//si muestro el indice del la pagina actual, no coloco enlace
-				?>
-					<b><?php echo $pagina." "; ?></b>
-				<?php
-						}
-						else{
-							//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-				?>
-							<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-				<?php
-						}
-					}
-				}
-			?>
+			<h2>Texto</h2>
+			<form action="modif_noticia.php" method="post" class="columninput">
+				<input type="text" id="nidr" name="nidr" value="<?php echo $idR ?>" required style="display:none;" />
+				<label>*<b>Titulo</b></label>
+				<input type="text" id="ttnt" name="ttnt" value="<?php echo $nmnt ?>" required />
+				<label><b>Resumen</b></label>
+				<textarea name="restnt" required><?php echo "$rsnt"; ?></textarea>
+				<label><b>Texto</b></label>
+				<textarea id="editor1" name="txtnt"><?php echo "$xtnt"; ?></textarea>
+				<script>
+					CKEDITOR.replace('txtnt');
+				</script>
+				<input type="submit" value="Modificar" id="valdc" />
+			</form>
 		</article>
 	</section>
 	<footer>
@@ -199,6 +169,15 @@
 </body>
 </html>
 <?php
+			}
+			else{
+				echo "<script type='text/javascript'>";
+					echo "alert('Noticia no existe o ha sido eliminado');";
+					echo "var pagina='../noticias';";
+					echo "document.location.href=pagina;";
+				echo "</script>";
+			}
+		}
 	}
 	else{
 		echo "<script type='text/javascript'>";
