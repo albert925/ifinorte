@@ -62,7 +62,7 @@
 	<header>
 		<article id="empr">
 			<figure id="logo">
-				<a href="index.php"><img src="imagenes/logo.jpg" alt="logo" /></a>
+				<a href="index.php"><img src="imagenes/logo.png" alt="logo" /></a>
 			</figure>
 		</article>
 		<article id="mn_red">

@@ -5,6 +5,7 @@ function inicio_pagina () {
 		$(window).scroll(mostrarmov);
 	}
 	$("#mn_mv").on("click",abrir_menuP);
+	$("#depar").on("change",buscar_muni);
 	$(".submen").on("click",abrirsubmenu);
 }
 function abrir_menuP () {
@@ -28,4 +29,13 @@ function mostrarmov () {
 	else{
 		$("header").css({position:"relative"});
 	}
+}
+function buscar_muni () {
+	var dpR=$("#depar").val();
+	$("#txmn").text("Buscando municipios...");
+	$.post("buscar_muni.php",{a:dpR},colocarmunicipio);
+}
+function colocarmunicipio (mnR) {
+	$("#txmn").text("");
+	$("#muni").html(mnR);
 }

@@ -1,4 +1,4 @@
-h2{
+h1,h2{
 	text-align: center;
 }
 .flrg{
@@ -7,4 +7,15 @@ h2{
 	-ms-justify-content: space-around;
 	justify-content: space-around;
 	padding-bottom: 1em;
+}
+@media screen and (max-width: 800px){
+	.cjaus{
+		margin: 1em auto;
+		width: 90%;
+	}
+	.flrg{
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
 }
