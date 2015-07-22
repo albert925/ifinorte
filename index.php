@@ -251,11 +251,6 @@
 					<?php
 						}
 					?>
-					<li><a href="">men</a>
-						<ul>
-							<li><a href="">men</a></li>
-						</ul>
-					</li>
 				</ul>
 			</nav>
 			<section>
