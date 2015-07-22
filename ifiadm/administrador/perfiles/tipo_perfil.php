@@ -78,7 +78,7 @@
 							<li><a href="../perfiles">Perfiles</a></li>
 						</ul>
 					</li>
-					<li><a href="../boletin">Noticias</a></li>
+					<li><a href="../noticias">Noticias</a></li>
 					<li><a href="../usuarios">Usuarios</a></li>
 					<li><a href="../"><?php echo "$usad"; ?></a></li>
 					<li><a href="../../../cerrar">Salir</a></li>

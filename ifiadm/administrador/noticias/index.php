@@ -16,9 +16,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Administrar menus verticales" />
+	<meta name="description" content="Administrar Perfiles" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>admin Galerias| Ifinorte</title>
+	<title>admin noticias| Ifinorte</title>
 	<link rel="icon" href="../../../imagenes/icon.png" />
 	<link rel="stylesheet" href="../../../css/normalize.css" />
 	<link rel="stylesheet" href="../../../css/iconos/style.css" />
@@ -27,7 +27,8 @@
 	<script src="../../../js/jquery_2_1_1.js"></script>
 	<script src="../../../js/scripag.js"></script>
 	<script src="../../../js/scripadmin.js"></script>
-	<script src="../../../js/galerias.js"></script>
+	<script src="../../../js/noticias.js"></script>
+	<script src="../../../ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<header>
@@ -53,7 +54,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
-						<a class="sell" href="../contenido">Contenido P</a>
+						<a href="../contenido">Contenido P</a>
 						<ul class="children2">
 							<li><a href="../contenido/menus.php">Menus Vertical</a></li>
 							<li><a href="../contenido/submenus.php">Submenus Vertical</a></li>
@@ -64,7 +65,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="3">
-						<a href="../portafolios">Portafolio de servicios</a>
+						<a href="portafolios">Portafolio de servicios</a>
 						<ul class="children3">
 							<li><a href="../portafolios/menuport.php">Menus protafolios</a></li>
 							<li><a href="../portafolios">Portafolios</a></li>
@@ -77,7 +78,7 @@
 							<li><a href="../perfiles">Perfiles</a></li>
 						</ul>
 					</li>
-					<li><a href="../noticias">Noticias</a></li>
+					<li><a class="sell" href="../noticias">Noticias</a></li>
 					<li><a href="../usuarios">Usuarios</a></li>
 					<li><a href="../"><?php echo "$usad"; ?></a></li>
 					<li><a href="../../../cerrar">Salir</a></li>
@@ -86,18 +87,36 @@
 		</article>
 	</header>
 	<nav id="mnad">
-		<a id="btC" href="#">Nuevo galeria</a>
-		<a href="images_galermv.php">Nuevo Imagen galeria</a>
+		<a id="btA" href="#">Nuevo Noticia</a>
 	</nav>
 	<section>
-		<h1>Galerias</h1>
-		<article id="cjC" class="oulcajas">
+		<h1>Noticias</h1>
+		<article id="cjA" class="oulcajas">
 			<article id="automargen">
-				<form action="#" method="post" class="columninput">
+				<form action="new_perfil.php" method="post" class="columninput">
+					<label>*<b>Del tipo perfil (Menus perfil)</b></label>
+					<select id="slmndc" name="slmndc">
+						<option value="0">Seleccione</option>
+						<?php
+							$Tmnpt="SELECT * from tp_dic order by man_tpdc asc";
+							$sql_tppf=mysql_query($Tmnpt,$conexion) or die (mysql_error());
+							while ($mtp=mysql_fetch_array($sql_tppf)) {
+								$idpfcd=$mtp['id_tpdc'];
+								$nmpfcd=$mtp['man_tpdc'];
+						?>
+						<option value="<?php echo $idpfcd ?>"><?php echo "$nmpfcd"; ?></option>
+						<?php
+							}
+						?>
+					</select>
 					<label>*<b>Titulo</b></label>
-					<input type="text" id="nmglmv" name="nmglmv" required />
-					<div id="txA"></div>
-					<input type="submit" value="Ingresar" id="nvgalme" />
+					<input type="text" id="ttdc" name="ttdc" required />
+					<label><b>Texto</b></label>
+					<textarea id="editor1" name="txtdc"></textarea>
+					<script>
+						CKEDITOR.replace('txtdc');
+					</script>
+					<input type="submit" value="Ingresar" id="valdc" />
 				</form>
 			</article>
 		</article>
@@ -113,40 +132,23 @@
 				else{
 					$inicio= ($pagina - 1)*$tamno_pagina;
 				}
-				$ssql="SELECT * from gal_mv order by id_glmv desc";
+				$ssql="SELECT * from noticias order by id_nt desc";
 				$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 				$num_total_registros= mysql_num_rows($rs);
 				$total_paginas= ceil($num_total_registros / $tamno_pagina);
-				$gsql="SELECT * from gal_mv order by id_glmv desc limit $inicio, $tamno_pagina";
+				$gsql="SELECT * from noticias order by id_nt desc limit $inicio, $tamno_pagina";
 				$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 				while ($gh=mysql_fetch_array($impsql)) {
-					$idgl=$gh['id_glmv'];
-					$nagl=$gh['tit_glmv'];
-					$fegl=$gh['fe_glmv'];
-					$primerimg="SELECT * from img_galeria where gal_id=$idgl order by id_img_gal asc limit 1";
-					$sql_primer=mysql_query($primerimg,$conexion) or die (mysql_error());
-					$numprumer=mysql_num_rows($sql_primer);
-					if ($numprumer>0) {
-						while ($yt=mysql_fetch_array($sql_primer)) {
-							$idtrG=$yt['id_img_gal'];
-							$ruttrG=$yt['rut_gal'];
-						}
-					}
-					else{
-						$idtrG=0;
-						$ruttrG="imagenes/predeterminado.png";
-					}
+					$iddc=$gh['id_nt'];
+					$tpdc=$gh['dc_id'];
+					$nmdc=$gh['tit_nt'];
+					$txdc=$gh['	rut_nt'];
 			?>
-			<figure>
-				<img src="../../../<?php echo $ruttrG ?>" alt="<?php echo $nagl ?>" />
-				<figcaption class="columninput">
-					<input type="text" id="mfgl_<?php echo $idgl ?>" value="<?php echo $nagl ?>" />
-					<div id="txB_<?php echo $idgl ?>"></div>
-					<input type="submit" value="Modificar Nombre" class="mofml" data-id="<?php echo $idgl ?>" />
-					<a id="disbyn" href="galermv_images.php?gl=<?php echo $idgl ?>">Imágenes</a>
-					<a class="doll" href="borr_glamv.php?br=<?php echo $idgl ?>">Borrar</a>
-				</figcaption>
-			</figure>
+			<article class="columninput">
+				<h2><?php echo "$nmdc"; ?></h2>
+				<a id="disbyn" href="moficiperfil.php?co=<?php echo $iddc ?>">Modificar</a>
+				<a class="doll" href="borr_perfil.php?br=<?php echo $iddc ?>">Borrar</a>
+			</article>
 			<?php
 				}
 			?>
