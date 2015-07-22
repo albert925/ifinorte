@@ -3,6 +3,8 @@ $(document).on("ready",inicio_usuarioC);
 function inicio_usuarioC () {
 	$("#camA").on("click",cambiarA);
 	$("#camB").on("click",cambiarB);
+	$("#camC").on("click",cambiarC);
+	$("#camD").on("click",cambiarD);
 }
 var bien={color:"#53A93F"};
 var normal={color:"#000"};
@@ -68,4 +70,48 @@ function resulcB (Bb) {
 			$("#txB").css(mal).html(Bb);
 		}
 	}
+}
+function cambiarC () {
+	alert("Deshabilitado");
+}
+function cambiarD () {
+	var idd=$(this).attr("data-us");
+	var psac=$("#coac").val();
+	var psna=$("#cona").val();
+	var psnb=$("#conb").val();
+	if (psac=="") {
+		$("#txD").css(mal).text("Ingrese la contraseña actual");
+	}
+	else{
+		if (psna=="" || psna.length<6) {
+			$("#txD").css(mal).text("Contraseña mínimo 6 dígitos");
+		}
+		else{
+			if (psnb!=psna) {
+				$("#txD").css(mal).text("Contraseñas no coinciden");
+			}
+			else{
+				$("#txD").css(normal).text("");
+				$("#txD").prepend("<center><img src='../imagenes/loadingb.gif' alt='loading' style='width:20px;' /></center>")
+				$.post("camb_passus.php",{fdd:idd,a:psac,b:psna},resulcD);
+			}
+		}
+	}
+}
+function resulcD (uu) {
+	if (uu=="2") {
+		$("#txD").css(mal).text("Contraseña actual incorrecta");
+	}
+	else{
+		if (uu=="3") {
+			$("#txD").css(bien).text("Contraseña cambiada");
+			setTimeout(direcionar,1500);
+		}
+		else{
+			$("#txD").css(mal).html(uu);
+		}
+	}
+}
+function direcionar () {
+	window.location.href="../cerrar/us.php";
 }

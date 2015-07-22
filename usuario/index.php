@@ -208,7 +208,7 @@
 				<label>*<b>Contraseña actual</b></label>
 				<input type="password" id="coac" />
 				<label>*<b>Contraseña nueva</b></label>
-				<input type="passsword" id="cona" />
+				<input type="password" id="cona" />
 				<label>*<b>Repite la contraseña nueva</b></label>
 				<input type="password" id="conb" />
 				<div id="txD"></div>
