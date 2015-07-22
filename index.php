@@ -12,7 +12,7 @@
 	mediante la prestación de servicios financieros a los entes territoriales, 
 	institutos descentralizados y empresas sociales del estado E.S.E" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>Ifinorte/prueba</title>
+	<title>Ifinorte</title>
 	<link rel="icon" href="imagenes/icon.png" />
 	<link rel="image_src" href="imagenes/logo.jpg" />
 	<link rel="stylesheet" href="css/normalize.css" />

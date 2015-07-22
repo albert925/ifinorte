@@ -1,0 +1,10 @@
+h2{
+	text-align: center;
+}
+.flrg{
+	display: flex;
+	-webkit-justify-content: space-around;
+	-ms-justify-content: space-around;
+	justify-content: space-around;
+	padding-bottom: 1em;
+}
