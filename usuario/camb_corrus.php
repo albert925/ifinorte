@@ -1,11 +1,7 @@
 <?php
 	include '../config.php';
-	$a=$_POST['a'];//nombres
-	$b=$_POST['b'];//apellidos
-	$c=$_POST['c'];//correo
-	$d=$_POST['d'];//contraseña
-	$nombreComp=$a." ".$b;
-	$hoy=date("Y-m-d");
+	$idR=$_POST['fbd'];//id us
+	$c=$_POST['a'];//correo
 	function rand_code($chars,$long)
 	{
 		$code="";
@@ -15,36 +11,28 @@
 		}
 		return $code;
 	}
-	function cifrarpass($pass)
-	{
-		$salt="pneyan$/";
-		$cifrar=sha1(md5($salt.$pass));
-		return $cifrar;
-	}
-	if ($a=="" || $b=="" || $c=="" || $d=="") {
+	if ($c=="") {
 		echo "1";
 	}
 	else{
-		$pscif=cifrarpass($d);
 		$existe="SELECT * from usuarios where cor_us='$c'";
 		$sql_existe=mysql_query($existe,$conexion) or die (mysql_error());
-		$numero=mysql_num_rows($sql_existe);
-		if ($numero>0) {
+		$numexs=mysql_num_rows($sql_existe);
+		if ($numexs>0) {
 			echo "2";
 		}
 		else{
 			$caracteres="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012456789";
 			$longitud=20;
-			$longib=8;
 			$codigoal=rand_code($caracteres,$longitud);
-			$ingresar="INSERT into usuarios(nom_ap_us,cor_us,pass_us,tp_us,estd_us,cod_reg_us,fecr_us) 
-				values('$nombreComp','$c','$pscif','1','2','$codigoal','$hoy')";
-			mysql_query($ingresar,$conexion) or die (mysql_error());
-			$tomar_id="SELECT id_us from usuarios where cor_us='$c'";
-			$sql_tomar=mysql_query($tomar_id,$conexion) or die (mysql_error());
-			while ($fg=mysql_fetch_array($sql_tomar)) {
-				$idus=$fg['id_us'];
+			$sacar_corract="SELECT * from usuarios where id_us=$idR";
+			$sql_corac=mysql_query($sacar_corract,$conexion) or die (mysql_error());
+			while ($ss=mysql_fetch_array($sql_corac)) {
+				$nomus=$ss['nom_ap_us'];
+				$corrAct=$ss['cor_us'];
 			}
+			$modificar="UPDATE usuarios set cod_reg_us='$codigoal',corrfm_us='$c' where id_us=$idR";
+			mysql_query($modificar,$conexion) or die (mysql_error());
 			include '../miler/class.phpmailer.php';
 			$mail=new PHPMailer();
 			$body="<section style='max-width:1100px;'>
@@ -52,19 +40,18 @@
 					<figure>
 						<img src='http://ifinorte.gov.co/imagenes/logo.png' alt='logo' />
 					</figure>
-					<h1>Registro</h1>
+					<h1>Cambio de correo</h1>
 				</header>
 				<section>
 					<article>
 						<p>
-							Hola $a $b te has registrado en la página de Ifinorte para poder 
-							ingresar click en el siguiente link para activar tu cuenta.
+							Hola $nomus has solicitado un cambio del siguiente correo $c. 
+							Si has solicitado el cambio click en cmabiar correo para hacer el cambio.
 						</p>
 						<p>
-							Link de activación: 
 							<a style='background: #002457;color: #fff;text-decoration: none;padding: 0.5em 0;' 
-								href='http://ifinorte.gov.co/activacion.php?alg=$codigoal&di=$idus' target='_blank'>
-								Terminar Registro
+								href=''http://ifinorte.gov.co/cambiA.php?alg=$codigoal&di=$idR' target='_blank'>
+								Cambiar correo
 							</a>
 						</p>
 					</article>
@@ -77,9 +64,9 @@
 			$mail->From = "no-reply@ifinorte.gov.co";
 			$mail->FromName = "Ifinorte";
 			$mail->AddReplyTo('no-reply@ifinorte.gov.co','Ifinorte');
-			$address="$c";
-			$mail->AddAddress($address, "$a $b");
-			$mail->Subject = "Registro";
+			$address="$corrAct";
+			$mail->AddAddress($address, "$nomus");
+			$mail->Subject = "Cambio de correo";
 			$mail->AltBody = "Cuerpo alternativo del mensaje";
 			$mail->CharSet = 'UTF-8';
 			$mail->MsgHTML($body);
