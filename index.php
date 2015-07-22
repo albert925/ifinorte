@@ -1,6 +1,31 @@
 <?php
 	include 'config.php';
 	include 'fecha_format.php';
+	session_start();
+	if (isset($_SESSION['us'])) {
+		$Russ=$_SESSION['us'];
+		$userdats="SELECT * from usuarios where id_us=$Russ";
+		$sql_users=mysql_query($userdats,$conexion) or die (mysql_error());
+		while ($us=mysql_fetch_array($sql_users)) {
+			$idus=$us['id_us'];
+			$avus=$us['avat_us'];
+			$ccus=$us['cc_us'];
+			$nmus=$us['nom_ap_us'];
+			$crus=$us['cor_us'];
+			$tlus=$us['tel_us'];
+			$mvus=$us['mov_us'];
+			$dpus=$us['depart_id'];
+			$mnus=$us['muni_id'];
+			$drus=$us['direc_us'];
+			$tpus=$us['tp_us'];
+			$cfus=$us['corrfm_us'];
+			$feus=$us['fecr_us'];
+		}
+		$nomP=split(" ", $nmus);
+	}
+	else{
+		$idus=0;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,6 +51,7 @@
 	<script src="js/jquery_2_1_1.js"></script>
 	<script src="js/owl_carousel_min.js"></script>
 	<script src="js/scripag.js"></script>
+	<script src="js/ingreG.js"></script>
 	<script type="application/ld+json">
 		{
 		  "@context" : "http://schema.org",
@@ -86,19 +112,38 @@
 					</li>
 					<li><a href="boletin">Boletin Informativo</a></li>
 					<li><a href="contacto">Contáctenos</a></li>
+					<?php
+						if ($idus=="0") {
+					?>
 					<li><a href="registro">Clientes</a></li>
+					<?php
+						}
+						else{
+					?>
+					<li><a href="usuario"><?php echo $nomP[0]; ?></a>
+						<ul>
+							<li><a href="usuario">Información</a></li>
+							<li><a href="cerrar/us.php">Salir</a></li>
+						</ul>
+					</li>
+					<?php
+						}
+					?>
 				</ul>
 			</nav>
 		</article>
 	</header>
 	<section class="ins_fra">
 		<article id="sesion">
+			<?php
+				if ($idus=="0") {
+			?>
 			<article class="inus">
 				<div class="bupis"><h2><span class="icon-user"></span> Login</h2></div>
 				<form action="#" method="post" class="columninput">
 					<input type="text" id="usin" required placeholder="Usuario" />
 					<input type="password" id="psin" required  placeholder="Contraseña" />
-					<div id="txA"></div>
+					<div id="txUs"></div>
 					<label><a href="recordar">Olvidaste como entrar?</a></label>
 					<label><a href="registro">Regístrate</a></label>
 					<div>
@@ -106,6 +151,20 @@
 					</div>
 				</form>
 			</article>
+			<?php
+				}
+				else{
+			?>
+			<article class="inus">
+				<div class="bupis"><h2><span class="icon-user"></span><?php echo $nomP[0]; ?></h2></div>
+				<article id="sesIngAc">
+					<a href="usuario">Información</a>
+					<a href="cerrar/us.php">Salir</a>
+				</article>
+			</article>
+			<?php
+				}
+			?>
 			<article class="ubi">
 				<div class="bupis"><h2><span class="icon-location"></span> Dirección</h2></div>
 				<p>

@@ -62,6 +62,25 @@ h1{
 			#noticias figure figcaption p{
 				color: #696969;
 			}
+#sesIngAc{
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+	#sesIngAc a{
+		background: #fff;
+		border-radius: 5px;
+		color: #CA0602;
+		margin: 0.5em auto;
+		padding: 0.5em 0;
+		text-align: center;
+		width: 50%;
+	}
+	#sesIngAc a:hover,#sesIngAc a:active{
+		background: #680001;
+		color: #fff;
+	}
 #sesion{
 	background: rgba(0,0,0,0.7);
 }
@@ -151,6 +170,9 @@ h1{
 @media screen and (max-width: 800px){
 		#noticias figure{
 			width: 40%;
+		}
+		#sesIngAc a{
+			width: 90%;
 		}
 		#todfrases .item h2{
 			font-size: 35px;
