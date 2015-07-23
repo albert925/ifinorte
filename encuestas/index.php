@@ -88,7 +88,7 @@
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
-						<a href="perfil">Perfiles Directivos</a>
+						<a href="../perfil">Perfiles Directivos</a>
 						<ul class="../children2">
 							<?php
 								$ttpfiles="SELECT * from tp_dic order by id_tpdc asc";
