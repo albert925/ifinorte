@@ -8,11 +8,14 @@
 	-ms-flex-direction: column;
 	flex-direction: column;
 }
- .menusdoctun a{
- 	color: #BE221A;
- 	font-weight: bold;
- 	text-decoration: none;
- }
+.menusdoctun{
+	margin: 0.25em 0;
+}
+	.menusdoctun a{
+		color: #BE221A;
+		font-weight: bold;
+		text-decoration: none;
+	}
  .menusdoctun a:hover,.menusdoctun a:active{
- 	text-decoration: underline;
- }
+		text-decoration: underline;
+	}
