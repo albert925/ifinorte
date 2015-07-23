@@ -24,7 +24,7 @@
 		font-size: 12px;
 		margin-top: 1em;
 	}
-.documns{
+.documns,.textmnv{
 	display: flex;
 	-webkit-flex-direction: column;
 	-ms-flex-direction: column;
@@ -58,6 +58,18 @@
 	}
 		.flgal figure figcaption{
 			text-align: center;
+		}
+	.textmnv .docmv{
+		padding: 0.5em 0;
+		border-bottom: 2px solid #ADADAD;
+	}
+		.textmnv .docmv a{
+			color: #BE221A;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		.textmnv .docmv a:hover,.textmnv .docmv a:active{
+			text-decoration: underline;
 		}
 @media screen and (max-width: 800px){
 		.flgal figure{

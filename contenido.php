@@ -1,5 +1,6 @@
 <?php
-	include '../config.php';
+	include 'config.php';
+	include 'fecha_format.php';
 	session_start();
 	if (isset($_SESSION['us'])) {
 		$Russ=$_SESSION['us'];
@@ -25,9 +26,9 @@
 	else{
 		$idus=0;
 	}
-	$Rra=$_GET['fa'];
-	$Rrb=$_GET['fb'];
-	switch ($Rra) {
+	$cta=$_GET['v'];
+	$ctb=$_GET['bv'];
+	switch ($cta) {
 		case '0':
 			$aa="1";
 			break;
@@ -35,10 +36,10 @@
 			$aa="1";
 			break;
 		default:
-			$aa="form_id=$Rra";
+			$aa="mv_id=$cta";
 			break;
 	}
-	switch ($Rrb) {
+	switch ($ctb) {
 		case '0':
 			$bb="";
 			break;
@@ -46,8 +47,23 @@
 			$bb="";
 			break;
 		default:
-			$bb="and sub_id=$Rrb";
+			$bb="and submv_id=$ctb";
 			break;
+	}
+	$nomMV="SELECT * from men_vert where id_mv=$cta";
+	$sql_nomv=mysql_query($nomMV,$conexion) or die (mysql_error());
+	while ($ila=mysql_fetch_array($sql_nomv)) {
+		$namemv=$ila['nam_mv'];
+	}
+	if ($ctb=="" || $ctb=="0") {
+		$namesbmv="";
+	}
+	else{
+		$nomSBMV="SELECT * from sub_mv where id_submv=$ctb";
+		$sql_nmsbmv=mysql_query($nomSBMV,$conexion) or die (mysql_error());
+		while ($ilb=mysql_fetch_array($sql_nmsbmv)) {
+			$namesbmv=" - ".$ilb['nam_submv'];
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -55,25 +71,26 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Formatos ifinorte" />
+	<meta name="description" content="<?php echo $frSn ?>" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>Formatos|Ifinorte</title>
-	<link rel="icon" href="../imagenes/icon.png" />
-	<link rel="stylesheet" href="../css/normalize.css" />
-	<link rel="stylesheet" href="../css/iconos/style.css" />
-	<link rel="stylesheet" href="../css/owl_carousel.css" />
-	<link rel="stylesheet" href="../css/owl_theme_min.css" />
-	<link rel="stylesheet" href="../css/style.css" />
-	<link rel="stylesheet" href="../css/frases.css" />
-	<script src="../js/jquery_2_1_1.js"></script>
-	<script src="../js/owl_carousel_min.js"></script>
-	<script src="../js/scripag.js"></script>
-	<script src="../js/ingreG.js"></script>
+	<title><?php echo "$ttSn"; ?>|Ifinorte</title>
+	<link rel="icon" href="imagenes/icon.png" />
+	<link rel="image_src" href="imagenes/logo.jpg" />
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/iconos/style.css" />
+	<link rel="stylesheet" href="css/owl_carousel.css" />
+	<link rel="stylesheet" href="css/owl_theme_min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/frases.css" />
+	<script src="js/jquery_2_1_1.js"></script>
+	<script src="js/owl_carousel_min.js"></script>
+	<script src="js/scripag.js"></script>
+	<script src="js/ingreG.js"></script>
 	<script type="application/ld+json">
 		{
 		  "@context" : "http://schema.org",
 		  "@type" : "LocalBusiness",
-		  "name" : "Galeria|Ifinorte",
+		  "name" : "Frases|Ifinorte",
 		  "image" : "url"
 		}
 	</script>
@@ -82,7 +99,7 @@
 	<header>
 		<article id="empr">
 			<figure id="logo">
-				<a href="../"><img src="../imagenes/logo.png" alt="logo" /></a>
+				<a href="index.php"><img src="imagenes/logo.png" alt="logo" /></a>
 			</figure>
 		</article>
 		<article id="mn_red">
@@ -93,10 +110,10 @@
 			<div id="mn_mv"><span class="icon-menu"></span></div>
 			<nav id="mnP">
 				<ul>
-					<li><a href="../">Inicio</a></li>
-					<li><a href="../nosotros">Quienes Somos</a></li>
+					<li><a href="index.php">Inicio</a></li>
+					<li><a href="nosotros">Quienes Somos</a></li>
 					<li class="submen" data-num="1">
-						<a href="../portafolio">Portafolio de servicios</a>
+						<a href="portafolio">Portafolio de servicios</a>
 						<ul class="children1">
 							<?php
 								$Tpf="SELECT * from mn_porf order by nam_po asc";
@@ -105,7 +122,7 @@
 									$idpf=$ffp['id_mn_po'];
 									$nmpf=$ffp['nam_po'];
 							?>
-							<li><a href="../portafolio/portaf.php?pf=<?php echo $idpf ?>"><?php echo "$nmpf"; ?></a></li>
+							<li><a href="portafolio/portaf.php?pf=<?php echo $idpf ?>"><?php echo "$nmpf"; ?></a></li>
 							<?php
 								}
 							?>
@@ -113,7 +130,7 @@
 					</li>
 					<li class="submen" data-num="2">
 						<a href="perfil">Perfiles Directivos</a>
-						<ul class="../children2">
+						<ul class="children2">
 							<?php
 								$ttpfiles="SELECT * from tp_dic order by id_tpdc asc";
 								$sql_perfil=mysql_query($ttpfiles,$conexion) or die (mysql_error());
@@ -121,26 +138,26 @@
 									$idfil=$fil['id_tpdc'];
 									$nmfil=$fil['man_tpdc'];
 							?>
-							<li><a href="../perfil/tpperfil.php?fl=<?php echo $idfil ?>"><?php echo "$nmfil"; ?></a></li>
+							<li><a href="perfil/tpperfil.php?fl=<?php echo $idfil ?>"><?php echo "$nmfil"; ?></a></li>
 							<?php
 								}
 							?>
 						</ul>
 					</li>
-					<li><a href="../boletin">Boletin Informativo</a></li>
-					<li><a href="../contacto">Contáctenos</a></li>
+					<li><a href="boletin">Boletin Informativo</a></li>
+					<li><a href="contacto">Contáctenos</a></li>
 					<?php
 						if ($idus=="0") {
 					?>
-					<li><a href="../registro">Clientes</a></li>
+					<li><a href="registro">Clientes</a></li>
 					<?php
 						}
 						else{
 					?>
-					<li><a href="../usuario"><?php echo $nomP[0]; ?></a>
+					<li><a href="usuario"><?php echo $nomP[0]; ?></a>
 						<ul>
-							<li><a href="../usuario">Información</a></li>
-							<li><a href="../cerrar/us.php">Salir</a></li>
+							<li><a href="usuario">Información</a></li>
+							<li><a href="cerrar/us.php">Salir</a></li>
 						</ul>
 					</li>
 					<?php
@@ -154,19 +171,25 @@
 		<article id="automargen" class="flmvycont">
 			<nav id="mnV">
 				<ul>
-					<li><a href="../galeria">Galeria</a></li>
-					<li><a href="../nosotros">Quejas y Reclamos</a></li>
-					<li><a href="../encuestas">Encuestas</a></li>
-					<li><a class="sell" href="../Formatos">Formatos</a></li>
+					<li><a href="galeria">Galeria</a></li>
+					<li><a href="nosotros">Quejas y Reclamos</a></li>
+					<li><a href="encuestas">Encuestas</a></li>
+					<li><a href="Formatos">Formatos</a></li>
 					<?php
 						$verMN="SELECT * from men_vert order by id_mv desc";
 						$sql_mnv=mysql_query($verMN,$conexion) or die (mysql_error());
 						while ($vv=mysql_fetch_array($sql_mnv)) {
 							$idmv=$vv['id_mv'];
 							$namv=$vv['nam_mv'];
+							if ($idmv==$cta) {
+								$sle="class='sell'";
+							}
+							else{
+								$sle="";
+							}
 					?>
 					<li>
-						<a href="../contenido.php?v=<?php echo $idmv ?>&bv=0"><?php echo "$namv"; ?></a>
+						<a <?php echo $sle ?> href="contenido.php?v=<?php echo $idmv ?>&bv=0"><?php echo "$namv"; ?></a>
 						<ul>
 							<?php
 								$subvv="SELECT * from sub_mv where mv_id=$idmv order by id_submv desc";
@@ -177,7 +200,7 @@
 										$idsbmv=$sbvv['id_submv'];
 										$namsv=$sbvv['nam_submv'];
 							?>
-							<li><a href="../contenido.php?v=<?php echo $idmv ?>&bv=<?php echo $idsbmv ?>"><?php echo "$namsv"; ?></a></li>
+							<li><a href="contenido.php?v=<?php echo $idmv ?>&bv=<?php echo $idsbmv ?>"><?php echo "$namsv"; ?></a></li>
 							<?php
 									}
 								}
@@ -190,8 +213,8 @@
 				</ul>
 			</nav>
 			<section>
-				<h1>Formatos</h1>
-				<article class="documns">
+				<h1><?php echo "$namemv"."$namesbmv"; ?></h1>
+				<article class="textmnv">
 					<?php
 						error_reporting(E_ALL ^ E_NOTICE);
 						$tamno_pagina=15;
@@ -203,24 +226,33 @@
 						else{
 							$inicio= ($pagina - 1)*$tamno_pagina;
 						}
-						$ssql="SELECT * from doc_form where $aa $bb order by id_doc_form desc";
+						$ssql="SELECT * from doc_mv where $aa $bb order by id_doc_mv desc";
 						$rs=mysql_query($ssql,$conexion) or die (mysql_error());
 						$num_total_registros= mysql_num_rows($rs);
 						$total_paginas= ceil($num_total_registros / $tamno_pagina);
-						$gsql="SELECT * from doc_form where $aa $bb order by id_doc_form desc limit $inicio, $tamno_pagina";
+						$gsql="SELECT * from doc_mv where $aa $bb order by id_doc_mv desc limit $inicio, $tamno_pagina";
 						$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
 						while ($gh=mysql_fetch_array($impsql)) {
-							$iddoc=$gh['id_doc_form'];
-							$rtdoc=$gh['rut_doc'];
+							$iddocmv=$gh['id_doc_mv'];
+							$ttdocmv=$gh['tit_mv'];
+							$rtdocmv=$gh['rut_docmv'];
+							$xtdocmv=$gh['txt_mv'];
+							$fedocmv=$gh['fe_mv'];
 					?>
-					<article class="document">
-						<a href="../<?php echo $rtdoc ?>" target="_blank"><?php echo "$rtdoc"; ?></a>
+					<article class="docmv">
+						<h2><?php echo "$ttdocmv"; ?></h2>
+						<article>
+							<?php echo "$xtdocmv"; ?>
+						</article>
+						<article class="columninput">
+							<a href="<?php echo $rtdocmv ?>" target="_blank"><?php echo "$rtdocmv"; ?></a>
+						</article>
 					</article>
 					<?php
 						}
 					?>
 				</article>
-				<article id="automargen">
+				<article>
 					<br />
 					<b>Páginas: </b>
 					<?php
@@ -268,7 +300,7 @@
 				<div class="item">
 					<figure>
 						<a href="<?php echo $vclk ?>" target="_blank">
-							<img src="../<?php echo $rtcv ?>" alt="<?php echo $nmcv ?>" />
+							<img src="<?php echo $rtcv ?>" alt="<?php echo $nmcv ?>" />
 						</a>
 					</figure>
 				</div>
@@ -290,14 +322,14 @@
 				<div>08:00 AM - 06:00 PM</div>
 			</article>
 			<article>
-				<a href="../contacto">Contáctenos</a>
-				<a href="../politicas">Políticas de privacidad y seguridad</a>
-				<a href="../portafolio">Portafolio de servicios</a>
-				<a href="../mapa_sitio">Mapa del sitio</a>
+				<a href="contacto">Contáctenos</a>
+				<a href="politicas">Políticas de privacidad y seguridad</a>
+				<a href="portafolio">Portafolio de servicios</a>
+				<a href="mapa_sitio">Mapa del sitio</a>
 			</article>
 			<article>
-				<a href="../tramites">Trámites y Servicios</a>
-				<a href="../Preguntas">Preguntas Frecuentes</a>
+				<a href="tramites">Trámites y Servicios</a>
+				<a href="Preguntas">Preguntas Frecuentes</a>
 			</article>
 		</article>
 		<article class="footfin">
