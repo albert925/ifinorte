@@ -1,7 +1,49 @@
+.cjform{
+	background: #BE221A;
+	border-radius: 5px;
+	color: #fff;
+	margin-bottom: 1em;
+}
+	.cjform a{
+		color: #fff;
+		margin: 0.25em 0;
+		text-decoration: none;
+	}
+		.cjform a:hover, .cjform a:active{
+			text-decoration: underline;
+		}
+	.cjform h2{
+		background: #000;
+		margin: 0.5em;
+		padding: 0 0.5em;
+	}
+		.cjform h2 a:hover{
+			color: #BD2119;
+		}
 	.confrases i{
 		font-size: 12px;
 		margin-top: 1em;
 	}
+.documns{
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+	.documns .document{
+		background: #D30801;
+		color:#fff;
+		margin: 1em 0;
+		text-align: center;
+		padding: 0.5em 0;
+	}
+		.documns .document a{
+			color: #fff;
+			text-decoration: none;
+		}
+		.documns .document a:hover,.documns .document a:active{
+			text-decoration: underline;
+		}
 .flgal{
 	display: flex;
 	-webkit-flex-wrap: wrap;
