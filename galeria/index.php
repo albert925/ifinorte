@@ -204,7 +204,7 @@
 							}
 					?>
 					<figure>
-						<a href="ind2x.php?gl=<?php echo $idg ?>">
+						<a href="ind2x.php?gl=<?php echo $idgl ?>">
 							<img src="../<?php echo $ruttrG ?>" alt="<?php echo $nagl ?>" />
 						</a>
 						<figcaption>
