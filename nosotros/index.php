@@ -31,16 +31,16 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Formatos ifinorte" />
-	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>Formatos|Ifinorte</title>
+	<meta name="description" content="Nosotros e información de la empresa ifinorte" />
+	<meta name="keywords" content="Financiero, prestacion de servicios" />
+	<title>Nosotros|Ifinorte</title>
 	<link rel="icon" href="../imagenes/icon.png" />
 	<link rel="stylesheet" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/iconos/style.css" />
 	<link rel="stylesheet" href="../css/owl_carousel.css" />
 	<link rel="stylesheet" href="../css/owl_theme_min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
-	<link rel="stylesheet" href="../css/frases.css" />
+	<link rel="stylesheet" href="../css/nosotros.css" />
 	<script src="../js/jquery_2_1_1.js"></script>
 	<script src="../js/owl_carousel_min.js"></script>
 	<script src="../js/scripag.js"></script>
@@ -49,7 +49,7 @@
 		{
 		  "@context" : "http://schema.org",
 		  "@type" : "LocalBusiness",
-		  "name" : "Galeria|Ifinorte",
+		  "name" : "Nosotros|Ifinorte",
 		  "image" : "url"
 		}
 	</script>
@@ -70,7 +70,7 @@
 			<nav id="mnP">
 				<ul>
 					<li><a href="../">Inicio</a></li>
-					<li><a href="../nosotros">Quienes Somos</a></li>
+					<li><a class="sell" href="../nosotros">Quienes Somos</a></li>
 					<li class="submen" data-num="1">
 						<a href="../portafolio">Portafolio de servicios</a>
 						<ul class="children1">
@@ -133,7 +133,7 @@
 					<li><a href="../galeria">Galeria</a></li>
 					<li><a href="../contacto">Quejas y Reclamos</a></li>
 					<li><a href="../encuestas">Encuestas</a></li>
-					<li><a class="sell" href="../Formatos">Formatos</a></li>
+					<li><a href="../Formatos">Formatos</a></li>
 					<?php
 						$verMN="SELECT * from men_vert order by id_mv desc";
 						$sql_mnv=mysql_query($verMN,$conexion) or die (mysql_error());
@@ -166,73 +166,49 @@
 				</ul>
 			</nav>
 			<section>
-				<h1>Formatos</h1>
-				<article class="flgal">
-					<?php
-						error_reporting(E_ALL ^ E_NOTICE);
-						$tamno_pagina=15;
-						$pagina= $_GET['pagina'];
-						if (!$pagina) {
-							$inicio=0;
-							$pagina=1;
-						}
-						else{
-							$inicio= ($pagina - 1)*$tamno_pagina;
-						}
-						$ssql="SELECT * from formatos order by id_form desc";
-						$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-						$num_total_registros= mysql_num_rows($rs);
-						$total_paginas= ceil($num_total_registros / $tamno_pagina);
-						$gsql="SELECT * from formatos order by id_form desc limit $inicio, $tamno_pagina";
-						$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-						while ($gh=mysql_fetch_array($impsql)) {
-							$idfo=$gh['id_form'];
-							$nafo=$gh['tit_form'];
-							$fefo=$gh['fe_form'];
-					?>
-					<article class="cjform">
-						<h2><a href="ind2x.php?fa=<?php echo $idfo ?>&fb=0"><?php echo "$nafo"; ?></a></h2>
-						<article class="columninput">
-							<?php
-								$subfor="SELECT * from sub_form where form_id=$idfo order by id_subf desc";
-								$sql_subfor=mysql_query($subfor,$conexion) or die (mysql_error());
-								while ($bsf=mysql_fetch_array($sql_subfor)) {
-									$idsbfo=$bsf['id_subf'];
-									$nasbfo=$bsf['tit_subf'];
-							?>
-							<a href="ind2x.php?fa=<?php echo $idfo ?>&fb=<?php echo $idsbfo ?>"><?php echo "$nasbfo"; ?></a>
-							<?php
-								}
-							?>
-						</article>
+				<h1>Nosotros e información</h1>
+				<article>
+					<h2>Quienes Somos</h2>
+					<article>
+						<p>
+							Somos la Enidad Financiera del Departamento Norte de Santander encargada de generar desarrollo económico y social mediante la prestación de servicios financieros a los entes territoriales, institutos descentralizados y empresas sociales del estado E.S.E
+						</p>
 					</article>
-					<?php
-						}
-					?>
-				</article>
-				<article id="automargen">
-					<br />
-					<b>Páginas: </b>
-					<?php
-						//muestro los distintos indices de las paginas
-						if ($total_paginas>1) {
-							for ($i=1; $i <=$total_paginas ; $i++) { 
-								if ($pagina==$i) {
-									//si muestro el indice del la pagina actual, no coloco enlace
-						?>
-							<b><?php echo $pagina." "; ?></b>
-						<?php
-								}
-								else{
-									//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-						?>
-									<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-						<?php
-								}
-							}
-						}
-					?>
+					<h2>Misión</h2>
+					<article>
+						<p>
+							Generar desarrollo económico y social, mediante la prestación de servicios financieros y gestión de proyectos, que impulsen y promuevan el desarrollo del Departamento Norte de Santander.
+						</p>
+					</article>
+					<h2>Visión</h2>
+					<article>
+						<p>
+							Ser reconocido en el año 2015 como instituto de Fomento y Desarrollo líder en la financiación, cofinanciación y Administración de proyectos que contribuyan al desarrollo del Departamento de Norte de Santander.
+						</p>
+					</article>
+					<h2>Objetivos de Calidad</h2>
+					<article>
+						<ul>
+							<li>Optimizar la prestación de servicios</li>
+							<li>Incrementar el nivel de colocaciones</li>
+							<li>Gestionar y optimizar la administración de proyectos y recursos financieros</li>
+							<li>Obtener mayor nivel de satisfacción del cliente externo</li>
+							<li>Fortalecer y mejorar los niveles de eficiencia, eficacia y efectividad del sistema de gestión de calidad</li>
+							<li>Promover el mejoramiento del bienestar social y económico del departamento</li>
+							<li>Mejorar el bienestar laboral</li>
+							<li>Incrementar la rentabilidad</li>
+						</ul>
+					</article>
+					<h2>Política de Calidad</h2>
+					<article>
+						<p>
+							En IFINORTE estamos comprometidos con el desarrollo de la región, mediante la optimización de servicios financieros y la administración de recursos y proyectos, fundamentados en los principios de eficacia, eficiencia y efectividad del sistema de gestión de calidad y del MECI, garantizando la sostenibilidad financiera y económica del instituto, el mejoramiento continuo y la satisfacción de nuestros  clientes.
+						</p>
+					</article>
+					<h2>Origama</h2>
+					<figure>
+						<img src="../imagenes/organigrama.jpg" alt="origama" />
+					</figure>
 				</article>
 			</section>
 		</article>

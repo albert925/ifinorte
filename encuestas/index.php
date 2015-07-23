@@ -31,9 +31,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Formatos ifinorte" />
+	<meta name="description" content="Galeria de ifinorte" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>Formatos|Ifinorte</title>
+	<title>Galeria|Ifinorte</title>
 	<link rel="icon" href="../imagenes/icon.png" />
 	<link rel="stylesheet" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/iconos/style.css" />
@@ -132,8 +132,8 @@
 				<ul>
 					<li><a href="../galeria">Galeria</a></li>
 					<li><a href="../contacto">Quejas y Reclamos</a></li>
-					<li><a href="../encuestas">Encuestas</a></li>
-					<li><a class="sell" href="../Formatos">Formatos</a></li>
+					<li><a class="sell" href="../encuestas">Encuestas</a></li>
+					<li><a href="../Formatos">Formatos</a></li>
 					<?php
 						$verMN="SELECT * from men_vert order by id_mv desc";
 						$sql_mnv=mysql_query($verMN,$conexion) or die (mysql_error());
@@ -166,74 +166,7 @@
 				</ul>
 			</nav>
 			<section>
-				<h1>Formatos</h1>
-				<article class="flgal">
-					<?php
-						error_reporting(E_ALL ^ E_NOTICE);
-						$tamno_pagina=15;
-						$pagina= $_GET['pagina'];
-						if (!$pagina) {
-							$inicio=0;
-							$pagina=1;
-						}
-						else{
-							$inicio= ($pagina - 1)*$tamno_pagina;
-						}
-						$ssql="SELECT * from formatos order by id_form desc";
-						$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-						$num_total_registros= mysql_num_rows($rs);
-						$total_paginas= ceil($num_total_registros / $tamno_pagina);
-						$gsql="SELECT * from formatos order by id_form desc limit $inicio, $tamno_pagina";
-						$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-						while ($gh=mysql_fetch_array($impsql)) {
-							$idfo=$gh['id_form'];
-							$nafo=$gh['tit_form'];
-							$fefo=$gh['fe_form'];
-					?>
-					<article class="cjform">
-						<h2><a href="ind2x.php?fa=<?php echo $idfo ?>&fb=0"><?php echo "$nafo"; ?></a></h2>
-						<article class="columninput">
-							<?php
-								$subfor="SELECT * from sub_form where form_id=$idfo order by id_subf desc";
-								$sql_subfor=mysql_query($subfor,$conexion) or die (mysql_error());
-								while ($bsf=mysql_fetch_array($sql_subfor)) {
-									$idsbfo=$bsf['id_subf'];
-									$nasbfo=$bsf['tit_subf'];
-							?>
-							<a href="ind2x.php?fa=<?php echo $idfo ?>&fb=<?php echo $idsbfo ?>"><?php echo "$nasbfo"; ?></a>
-							<?php
-								}
-							?>
-						</article>
-					</article>
-					<?php
-						}
-					?>
-				</article>
-				<article id="automargen">
-					<br />
-					<b>Páginas: </b>
-					<?php
-						//muestro los distintos indices de las paginas
-						if ($total_paginas>1) {
-							for ($i=1; $i <=$total_paginas ; $i++) { 
-								if ($pagina==$i) {
-									//si muestro el indice del la pagina actual, no coloco enlace
-						?>
-							<b><?php echo $pagina." "; ?></b>
-						<?php
-								}
-								else{
-									//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-						?>
-									<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-						<?php
-								}
-							}
-						}
-					?>
-				</article>
+				<h1>Encuestas</h1>
 			</section>
 		</article>
 	</section>

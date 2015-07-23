@@ -131,7 +131,7 @@
 			<nav id="mnV">
 				<ul>
 					<li><a class="sell" href="../galeria">Galeria</a></li>
-					<li><a href="../nosotros">Quejas y Reclamos</a></li>
+					<li><a href="../contacto">Quejas y Reclamos</a></li>
 					<li><a href="../encuestas">Encuestas</a></li>
 					<li><a href="../Formatos">Formatos</a></li>
 					<?php
