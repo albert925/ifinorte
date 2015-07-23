@@ -71,9 +71,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="<?php echo $frSn ?>" />
+	<meta name="description" content="<?php echo $namesbmv ?>" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title><?php echo "$ttSn"; ?>|Ifinorte</title>
+	<title><?php echo "$namesbmv"; ?>|Ifinorte</title>
 	<link rel="icon" href="imagenes/icon.png" />
 	<link rel="image_src" href="imagenes/logo.jpg" />
 	<link rel="stylesheet" href="css/normalize.css" />
