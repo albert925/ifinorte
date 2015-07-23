@@ -165,9 +165,9 @@
 							$idmv=$vv['id_mv'];
 							$namv=$vv['nam_mv'];
 					?>
-					<li>
+					<li class="submenbb" data-num="<?php echo $idmv ?>">
 						<a href="../contenido.php?v=<?php echo $idmv ?>&bv=0"><?php echo "$namv"; ?></a>
-						<ul>
+						<ul class="clsichil<?php echo $idmv ?>">
 							<?php
 								$subvv="SELECT * from sub_mv where mv_id=$idmv order by id_submv desc";
 								$sql_sbvv=mysql_query($subvv,$conexion) or die (mysql_error());

@@ -7,6 +7,7 @@ function inicio_pagina () {
 	$("#mn_mv").on("click",abrir_menuP);
 	$("#depar").on("change",buscar_muni);
 	$(".submen").on("click",abrirsubmenu);
+	$(".submenbb").on("click",abrirdossubmenu);
 }
 function abrir_menuP () {
 	if (contador==1) {
@@ -21,6 +22,11 @@ function abrir_menuP () {
 function abrirsubmenu () {
 	var numerothis=$(this).attr("data-num");
 	$(".children"+numerothis).slideToggle();
+}
+function abrirdossubmenu () {
+	var numerothis=$(this).attr("data-num");
+	console.log(numerothis);
+	$(".clsichil"+numerothis).slideToggle();
 }
 function mostrarmov () {
 	if ($(window).scrollTop()>0) {
