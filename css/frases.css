@@ -2,3 +2,23 @@
 		font-size: 12px;
 		margin-top: 1em;
 	}
+.flgal{
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: space-between;
+	-ms-justify-content: space-between;
+	justify-content: space-between;
+}
+	.flgal figure{
+		width: 30%;
+	}
+		.flgal figure figcaption{
+			text-align: center;
+		}
+@media screen and (max-width: 800px){
+		.flgal figure{
+			width: 40%;
+		}
+}

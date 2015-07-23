@@ -25,18 +25,37 @@
 	else{
 		$idus=0;
 	}
+	$idR=$_GET['gl'];
+	if ($idR=="") {
+		echo "<script type='text/javascript'>";
+			echo "alert('id galeria no disponible');";
+			echo "var pagina='../galeria';";
+			echo "document.location.href=pagina;";
+		echo "</script>";
+	}
+	else{
+		$datos="SELECT * from gal_mv where id_glmv=$idR";
+		$sql_datos=mysql_query($datos,$conexion) or die (mysql_error());
+		$numdatos=mysql_num_rows($sql_datos);
+		if ($numdatos>0) {
+			while ($dt=mysql_fetch_array($sql_datos)) {
+				$nagl=$dt['tit_glmv'];
+				$fegl=$dt['fe_glmv'];
+			}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, maximun-scale=1" />
-	<meta name="description" content="Galeria de ifinorte" />
+	<meta name="description" content="Galeria <?php echo $nagl ?>" />
 	<meta name="keywords" content="Finacioero, prestacion de servicios" />
-	<title>Galeria|Ifinorte</title>
+	<title>Galeria <?php echo "$nagl"; ?>|Ifinorte</title>
 	<link rel="icon" href="../imagenes/icon.png" />
 	<link rel="stylesheet" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/iconos/style.css" />
+	<link rel="stylesheet" href="../css/default/default.css" />
+	<link rel="stylesheet" href="../css/nivo_slider.css" />
 	<link rel="stylesheet" href="../css/owl_carousel.css" />
 	<link rel="stylesheet" href="../css/owl_theme_min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
@@ -166,79 +185,24 @@
 				</ul>
 			</nav>
 			<section>
-				<h1>Galerias</h1>
-				<article class="flgal">
-					<?php
-						error_reporting(E_ALL ^ E_NOTICE);
-						$tamno_pagina=15;
-						$pagina= $_GET['pagina'];
-						if (!$pagina) {
-							$inicio=0;
-							$pagina=1;
-						}
-						else{
-							$inicio= ($pagina - 1)*$tamno_pagina;
-						}
-						$ssql="SELECT * from gal_mv order by id_glmv desc";
-						$rs=mysql_query($ssql,$conexion) or die (mysql_error());
-						$num_total_registros= mysql_num_rows($rs);
-						$total_paginas= ceil($num_total_registros / $tamno_pagina);
-						$gsql="SELECT * from gal_mv order by id_glmv desc limit $inicio, $tamno_pagina";
-						$impsql=mysql_query($gsql,$conexion) or die (mysql_error());
-						while ($gh=mysql_fetch_array($impsql)) {
-							$idgl=$gh['id_glmv'];
-							$nagl=$gh['tit_glmv'];
-							$fegl=$gh['fe_glmv'];
-							$primerimg="SELECT * from img_galeria where gal_id=$idgl order by id_img_gal asc limit 1";
-							$sql_primer=mysql_query($primerimg,$conexion) or die (mysql_error());
-							$numprumer=mysql_num_rows($sql_primer);
-							if ($numprumer>0) {
-								while ($yt=mysql_fetch_array($sql_primer)) {
-									$idtrG=$yt['id_img_gal'];
-									$ruttrG=$yt['rut_gal'];
+				<h1><?php echo "$nagl"; ?></h1>
+				<figure id="galery">
+					<div class="slider-wrapper theme-default">
+						<div id="slider" class="nivoSlider">
+							<?php
+								$slid="SELECT * from img_galeria where gal_id=$idR order by id_img_gal asc";
+								$sql_slider=mysql_query($slid,$conexion) or die (mysql_error());
+								while ($ls=mysql_fetch_array($sql_slider)) {
+									$idSg=$ls['id_img_gal'];
+									$rtSg=$ls['rut_gal'];
+							?>
+							<img src="../<?php echo $rtSg ?>" alt="imagen_<?php echo $idSg ?>" title="#caption<?php echo $idSg ?>" />
+							<?php
 								}
-							}
-							else{
-								$idtrG=0;
-								$ruttrG="imagenes/predeterminado.png";
-							}
-					?>
-					<figure>
-						<a href="ind2x.php?gl=<?php echo $idg ?>">
-							<img src="../<?php echo $ruttrG ?>" alt="<?php echo $nagl ?>" />
-						</a>
-						<figcaption>
-							<h2><?php echo "$nagl"; ?></h2>
-						</figcaption>
-					</figure>
-					<?php
-						}
-					?>
-				</article>
-				<article id="automargen">
-					<br />
-					<b>Páginas: </b>
-					<?php
-						//muestro los distintos indices de las paginas
-						if ($total_paginas>1) {
-							for ($i=1; $i <=$total_paginas ; $i++) { 
-								if ($pagina==$i) {
-									//si muestro el indice del la pagina actual, no coloco enlace
-						?>
-							<b><?php echo $pagina." "; ?></b>
-						<?php
-								}
-								else{
-									//si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página 
-						?>
-									<a href="index.php?pagina=<?php echo $i ?>"><?php echo "$i"; ?></a>
-
-						<?php
-								}
-							}
-						}
-					?>
-				</article>
+							?>
+						</div>
+					</div>
+				</figure>
 			</section>
 		</article>
 	</section>
@@ -310,6 +274,30 @@
 			</article>
 		</article>
 	</footer>
+	<script src="../js/nivo_slider.js"></script>
+	<script type="text/javascript">
+		$(window).load(function(){
+      $('#slider').nivoSlider({
+          effect: 'fade',
+          slices: 15,
+          boxCols: 8,
+          boxRows: 4,
+          animSpeed: 500,
+          pauseTime: 10000,
+          pauseOnHover:true,
+          startSlide: 0,
+          directionNav: true,
+          controlNav: false,
+          controlNavThumbs: false,
+          pauseOnHover: true,
+          manualAdvance: false,
+          prevText: 'Prev',
+          nextText: 'Next',
+          randomStart: false,
+      });
+   	});
+   	// http://web.tursos.com/como-implementar-nivo-slider-en-tu-pagina-web/
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('.owl-carousel').owlCarousel({
@@ -340,3 +328,14 @@
 	</script>
 </body>
 </html>
+<?php
+		}
+		else{
+			echo "<script type='text/javascript'>";
+				echo "alert('Galeria no eiste o eliminada');";
+				echo "var pagina='../galeria';";
+				echo "document.location.href=pagina;";
+			echo "</script>";
+		}
+	}
+?>
