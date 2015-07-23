@@ -1,0 +1,18 @@
+.artport{
+	border-bottom: 1px solid #ADADAD;
+	padding-bottom: 1em;
+}
+.columportafolio{
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+ .menusdoctun a{
+ 	color: #BE221A;
+ 	font-weight: bold;
+ 	text-decoration: none;
+ }
+ .menusdoctun a:hover,.menusdoctun a:active{
+ 	text-decoration: underline;
+ }
