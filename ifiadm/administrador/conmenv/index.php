@@ -127,8 +127,8 @@
 					</select>
 					<label>*<b>Titulo</b></label>
 					<input type="text" id="titcont" name="titcont" required />
-					<label>*<b>Archivo</b></label>
-					<input type="file" id="arcct" name="arcct" required />
+					<label><b>Archivo</b></label>
+					<input type="file" id="arcct" name="arcct" />
 					<label>*<b>Texto</b></label>
 					<textarea id="editor1" name="txtcont"></textarea>
 					<script>
