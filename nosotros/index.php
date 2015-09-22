@@ -205,7 +205,7 @@
 							En IFINORTE estamos comprometidos con el desarrollo de la región, mediante la optimización de servicios financieros y la administración de recursos y proyectos, fundamentados en los principios de eficacia, eficiencia y efectividad del sistema de gestión de calidad y del MECI, garantizando la sostenibilidad financiera y económica del instituto, el mejoramiento continuo y la satisfacción de nuestros  clientes.
 						</p>
 					</article>
-					<h2>Origama</h2>
+					<h2>Organigrama</h2>
 					<figure>
 						<img src="../imagenes/organigrama.jpg" alt="origama" />
 					</figure>

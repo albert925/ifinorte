@@ -49,6 +49,7 @@
 						<ul class="children1">
 							<li><a href="../slider">Slider Noticias</a></li>
 							<li><a class="sell" href="../slider/slider_images.php">Slider Imágenes</a></li>
+							<li><a href="../proveedor">Proveedores</a></li>
 						</ul>
 					</li>
 					<li class="submen" data-num="2">
