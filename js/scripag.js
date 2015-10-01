@@ -26,7 +26,15 @@ function abrirsubmenu () {
 function abrirdossubmenu () {
 	var numerothis=$(this).attr("data-num");
 	console.log(numerothis);
-	$(".clsichil"+numerothis).slideToggle();
+	$(".clsichil"+numerothis).slideToggle(function () {
+		var desl=$(this).css("display");
+		if (desl=="none") {
+			$("#mvv"+numerothis).css({transform: "rotate(180deg)"});
+		}
+		else{
+			$("#mvv"+numerothis).css({transform: "rotate(0deg)"});
+		}
+	});
 }
 function mostrarmov () {
 	if ($(window).scrollTop()>0) {

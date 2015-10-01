@@ -94,7 +94,7 @@
 						<a href="../portafolio">Portafolio de servicios</a>
 						<ul class="children1">
 							<?php
-								$Tpf="SELECT * from mn_porf order by nam_po asc";
+								$Tpf="SELECT * from mn_porf order by id_mn_po asc";
 								$sql_Tpf=mysql_query($Tpf,$conexion) or die (mysql_error());
 								while ($ffp=mysql_fetch_array($sql_Tpf)) {
 									$idpf=$ffp['id_mn_po'];
@@ -151,20 +151,33 @@
 				<ul>
 					<li><a class="sell" href="../galeria">Galeria</a></li>
 					<li><a href="../contacto">Quejas y Reclamos</a></li>
-					<li><a href="../encuestas">Encuestas</a></li>
 					<li><a href="../Formatos">Formatos</a></li>
 					<?php
-						$verMN="SELECT * from men_vert order by id_mv desc";
+						$verMN="SELECT * from men_vert order by id_mv asc";
 						$sql_mnv=mysql_query($verMN,$conexion) or die (mysql_error());
 						while ($vv=mysql_fetch_array($sql_mnv)) {
 							$idmv=$vv['id_mv'];
 							$namv=$vv['nam_mv'];
 					?>
-					<li class="submenbb" data-num="<?php echo $idmv ?>">
-						<a href="../contenido.php?v=<?php echo $idmv ?>&bv=0"><?php echo "$namv"; ?></a>
+					<li>
+						<div id='flul'>
+							<a href="../contenido.php?v=<?php echo $idmv ?>&bv=0"><?php echo "$namv"; ?></a>
+							<?php
+								$exv="SELECT * from sub_mv where mv_id=$idmv";
+								$sqlexv=mysql_query($exv,$conexion) or die (mysql_error());
+								$numex=mysql_num_rows($sqlexv);
+								if ($numex>0) {
+							?>
+							<div id="mvv<?php echo $idmv ?>" class="submenbb" data-num="<?php echo $idmv ?>">
+								<span class="icon-chevron-up"></span>
+							</div>
+							<?php
+								}
+							?>
+						</div>
 						<ul class="clsichil<?php echo $idmv ?>">
 							<?php
-								$subvv="SELECT * from sub_mv where mv_id=$idmv order by id_submv desc";
+								$subvv="SELECT * from sub_mv where mv_id=$idmv order by id_submv asc";
 								$sql_sbvv=mysql_query($subvv,$conexion) or die (mysql_error());
 								$numsbvv=mysql_num_rows($sql_sbvv);
 								if ($numsbvv>0) {

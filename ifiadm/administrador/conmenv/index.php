@@ -139,7 +139,7 @@
 				</form>
 			</article>
 		</article>
-		<article id="automargen" class="flB">
+		<article id="automargen" class="columninput">
 			<?php
 				error_reporting(E_ALL ^ E_NOTICE);
 				$tamno_pagina=15;

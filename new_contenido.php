@@ -24,7 +24,7 @@
 		//----------------------------------------
 		if ($a=="0" || $a=="" || $c=="") {
 			echo "<script type='text/javascript'>";
-				echo "alert('Archivo menu o nombre no disponible');";
+				echo "alert('id menu o nombre no disponible');";
 				echo "var pagina='ifiadm/administrador/conmenv/';";
 				echo "document.location.href=pagina;";
 			echo "</script>";
